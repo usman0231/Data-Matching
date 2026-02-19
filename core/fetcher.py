@@ -31,10 +31,14 @@ async def _fetch_paginated(
     page = 1
 
     while True:
-        params = {"days": days, "page": page, "limit": page_size}
+        params = {"days": days, "page": page, "limit": page_size, "api_key": api_key}
         if prefix:
             params["prefix"] = prefix
-        headers = {"X-Api-Key": api_key}
+        headers = {
+            "X-Api-Key": api_key,
+            "User-Agent": "DataMatcher/1.0",
+            "Accept": "application/json",
+        }
 
         async with session.get(
             url, params=params, headers=headers, timeout=aiohttp.ClientTimeout(total=timeout)

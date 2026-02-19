@@ -414,3 +414,244 @@
 [2026-02-19 21:17:20] INFO     datamatcher | Email sent to ['usman@youronlineconversation.com']
 [2026-02-19 21:17:20] INFO     datamatcher | PIPELINE COMPLETE in 6.01s
 [2026-02-19 21:17:29] INFO     datamatcher | Shutting down
+[2026-02-19 21:18:12] INFO     datamatcher | Loaded config: 2 clients, 2 days lookback
+[2026-02-19 21:24:10] INFO     datamatcher | ============================================================
+[2026-02-19 21:24:10] INFO     datamatcher | PIPELINE START - 2 clients, 2 days
+[2026-02-19 21:24:10] INFO     datamatcher | ============================================================
+[2026-02-19 21:24:10] INFO     datamatcher | Starting fetch for 2/2 enabled clients...
+[2026-02-19 21:24:10] INFO     datamatcher | [OINUSA] Fetching data (last 2 days)...
+[2026-02-19 21:24:10] INFO     datamatcher | [MAUSA] Fetching data (last 2 days)...
+[2026-02-19 21:24:12] INFO     datamatcher | [OINUSA] Fetched 63 checkouts, 135 transactions
+[2026-02-19 21:24:13] INFO     datamatcher | [MAUSA] Fetched 127 checkouts, 290 transactions
+[2026-02-19 21:24:13] INFO     datamatcher | Fetch complete: 2/2 clients successful
+[2026-02-19 21:24:13] INFO     datamatcher | Starting matching for 2 clients (workers=12)...
+[2026-02-19 21:24:13] INFO     datamatcher | [OINUSA] Matched: 63, Unmatched: 0, Rate: 100.0%
+[2026-02-19 21:24:13] INFO     datamatcher | [MAUSA] Matched: 117, Unmatched: 10, Rate: 92.1%
+[2026-02-19 21:24:13] INFO     datamatcher | Matching complete: 180 matched, 10 unmatched across all clients
+[2026-02-19 21:24:13] INFO     datamatcher | Reports saved to D:\projects\python\dataMatching\reports\20260219_212413
+[2026-02-19 21:24:20] INFO     datamatcher | Email sent to ['usman@youronlineconversation.com']
+[2026-02-19 21:24:20] INFO     datamatcher | PIPELINE COMPLETE in 10.18s
+[2026-02-19 21:48:52] INFO     datamatcher | ============================================================
+[2026-02-19 21:48:52] INFO     datamatcher | PIPELINE START - 3 clients, 2 days
+[2026-02-19 21:48:52] INFO     datamatcher | ============================================================
+[2026-02-19 21:48:52] INFO     datamatcher | Starting fetch for 3/3 enabled clients...
+[2026-02-19 21:48:52] INFO     datamatcher | [OINUSA] Fetching data (last 2 days)...
+[2026-02-19 21:48:52] INFO     datamatcher | [MAUSA] Fetching data (last 2 days)...
+[2026-02-19 21:48:52] INFO     datamatcher | [LRBT] Fetching data (last 2 days)...
+[2026-02-19 21:48:53] ERROR    datamatcher | [LRBT] Fetch failed: HTTP 403 from https://lrbt.org.uk/backend/dataManagement/get_transactions.php
+[2026-02-19 21:48:53] INFO     datamatcher | [OINUSA] Fetched 61 checkouts, 133 transactions
+[2026-02-19 21:48:53] INFO     datamatcher | [MAUSA] Fetched 130 checkouts, 294 transactions
+[2026-02-19 21:48:53] INFO     datamatcher | Fetch complete: 2/3 clients successful
+[2026-02-19 21:48:53] INFO     datamatcher | Starting matching for 3 clients (workers=12)...
+[2026-02-19 21:48:53] INFO     datamatcher | [OINUSA] Matched: 61, Unmatched: 0, Rate: 100.0%
+[2026-02-19 21:48:53] INFO     datamatcher | [MAUSA] Matched: 120, Unmatched: 10, Rate: 92.3%
+[2026-02-19 21:48:53] INFO     datamatcher | Matching complete: 181 matched, 10 unmatched across all clients
+[2026-02-19 21:48:53] INFO     datamatcher | Reports saved to D:\projects\python\dataMatching\reports\20260219_214853
+[2026-02-19 21:48:58] INFO     datamatcher | Email sent to ['usman@youronlineconversation.com']
+[2026-02-19 21:48:58] INFO     datamatcher | PIPELINE COMPLETE in 6.31s
+[2026-02-19 21:51:30] INFO     datamatcher | ============================================================
+[2026-02-19 21:51:30] INFO     datamatcher | PIPELINE START - 3 clients, 2 days
+[2026-02-19 21:51:30] INFO     datamatcher | ============================================================
+[2026-02-19 21:51:30] INFO     datamatcher | Starting fetch for 3/3 enabled clients...
+[2026-02-19 21:51:30] INFO     datamatcher | [OINUSA] Fetching data (last 2 days)...
+[2026-02-19 21:51:30] INFO     datamatcher | [MAUSA] Fetching data (last 2 days)...
+[2026-02-19 21:51:30] INFO     datamatcher | [LRBT] Fetching data (last 2 days)...
+[2026-02-19 21:51:31] ERROR    datamatcher | [LRBT] Fetch failed: HTTP 403 from https://lrbt.org.uk/backend/dataManagement/get_checkout_journey.php
+[2026-02-19 21:51:31] INFO     datamatcher | [OINUSA] Fetched 61 checkouts, 133 transactions
+[2026-02-19 21:51:31] INFO     datamatcher | [MAUSA] Fetched 130 checkouts, 294 transactions
+[2026-02-19 21:51:31] INFO     datamatcher | Fetch complete: 2/3 clients successful
+[2026-02-19 21:51:31] INFO     datamatcher | Starting matching for 3 clients (workers=12)...
+[2026-02-19 21:51:31] INFO     datamatcher | [OINUSA] Matched: 61, Unmatched: 0, Rate: 100.0%
+[2026-02-19 21:51:31] INFO     datamatcher | [MAUSA] Matched: 120, Unmatched: 10, Rate: 92.3%
+[2026-02-19 21:51:31] INFO     datamatcher | Matching complete: 181 matched, 10 unmatched across all clients
+[2026-02-19 21:51:31] INFO     datamatcher | Reports saved to D:\projects\python\dataMatching\reports\20260219_215131
+[2026-02-19 21:51:36] INFO     datamatcher | Email sent to ['usman@youronlineconversation.com']
+[2026-02-19 21:51:36] INFO     datamatcher | PIPELINE COMPLETE in 6.15s
+[2026-02-19 21:56:47] INFO     datamatcher | ============================================================
+[2026-02-19 21:56:47] INFO     datamatcher | PIPELINE START - 3 clients, 2 days
+[2026-02-19 21:56:47] INFO     datamatcher | ============================================================
+[2026-02-19 21:56:47] INFO     datamatcher | Starting fetch for 1/3 enabled clients...
+[2026-02-19 21:56:47] INFO     datamatcher | [LRBT] Fetching data (last 2 days)...
+[2026-02-19 21:56:48] ERROR    datamatcher | [LRBT] Fetch failed: HTTP 403 from https://lrbt.org.uk/backend/dataManagement/get_checkout_journey.php
+[2026-02-19 21:56:48] INFO     datamatcher | Fetch complete: 0/1 clients successful
+[2026-02-19 21:56:48] INFO     datamatcher | Starting matching for 1 clients (workers=12)...
+[2026-02-19 21:56:48] INFO     datamatcher | Matching complete: 0 matched, 0 unmatched across all clients
+[2026-02-19 21:56:48] INFO     datamatcher | Reports saved to D:\projects\python\dataMatching\reports\20260219_215648
+[2026-02-19 21:56:53] INFO     datamatcher | Email sent to ['usman@youronlineconversation.com']
+[2026-02-19 21:56:53] INFO     datamatcher | PIPELINE COMPLETE in 5.43s
+[2026-02-19 21:57:04] INFO     datamatcher | ============================================================
+[2026-02-19 21:57:04] INFO     datamatcher | PIPELINE START - 3 clients, 2 days
+[2026-02-19 21:57:04] INFO     datamatcher | ============================================================
+[2026-02-19 21:57:04] INFO     datamatcher | Starting fetch for 1/3 enabled clients...
+[2026-02-19 21:57:04] INFO     datamatcher | [LRBT] Fetching data (last 2 days)...
+[2026-02-19 21:57:05] ERROR    datamatcher | [LRBT] Fetch failed: HTTP 403 from https://lrbt.org.uk/backend/dataManagement/get_checkout_journey.php
+[2026-02-19 21:57:05] INFO     datamatcher | Fetch complete: 0/1 clients successful
+[2026-02-19 21:57:05] INFO     datamatcher | Starting matching for 1 clients (workers=12)...
+[2026-02-19 21:57:05] INFO     datamatcher | Matching complete: 0 matched, 0 unmatched across all clients
+[2026-02-19 21:57:05] INFO     datamatcher | Reports saved to D:\projects\python\dataMatching\reports\20260219_215705
+[2026-02-19 21:57:09] INFO     datamatcher | Email sent to ['usman@youronlineconversation.com']
+[2026-02-19 21:57:09] INFO     datamatcher | PIPELINE COMPLETE in 4.89s
+[2026-02-19 22:01:40] INFO     datamatcher | Shutting down
+[2026-02-19 22:01:42] INFO     datamatcher | Loaded config: 3 clients, 2 days lookback
+[2026-02-19 22:01:42] INFO     datamatcher | ============================================================
+[2026-02-19 22:01:42] INFO     datamatcher | PIPELINE START - 3 clients, 2 days
+[2026-02-19 22:01:42] INFO     datamatcher | ============================================================
+[2026-02-19 22:01:42] INFO     datamatcher | Starting fetch for 1/3 enabled clients...
+[2026-02-19 22:01:42] INFO     datamatcher | [LRBT] Fetching data (last 2 days)...
+[2026-02-19 22:01:42] ERROR    datamatcher | [LRBT] Fetch failed: HTTP 403 from https://lrbt.org.uk/backend/dataManagement/get_transactions.php
+[2026-02-19 22:01:42] INFO     datamatcher | Fetch complete: 0/1 clients successful
+[2026-02-19 22:01:42] INFO     datamatcher | Starting matching for 1 clients (workers=12)...
+[2026-02-19 22:01:42] INFO     datamatcher | Matching complete: 0 matched, 0 unmatched across all clients
+[2026-02-19 22:01:42] INFO     datamatcher | Reports saved to D:\projects\python\dataMatching\reports\20260219_220142
+[2026-02-19 22:01:48] INFO     datamatcher | Email sent to ['usman@youronlineconversation.com']
+[2026-02-19 22:01:48] INFO     datamatcher | PIPELINE COMPLETE in 5.89s
+[2026-02-19 22:03:29] INFO     datamatcher | Shutting down
+[2026-02-19 22:03:31] INFO     datamatcher | Loaded config: 3 clients, 2 days lookback
+[2026-02-19 22:03:31] INFO     datamatcher | ============================================================
+[2026-02-19 22:03:31] INFO     datamatcher | PIPELINE START - 3 clients, 2 days
+[2026-02-19 22:03:31] INFO     datamatcher | ============================================================
+[2026-02-19 22:03:31] INFO     datamatcher | Starting fetch for 1/3 enabled clients...
+[2026-02-19 22:03:31] INFO     datamatcher | [LRBT] Fetching data (last 2 days)...
+[2026-02-19 22:03:32] INFO     datamatcher | [LRBT] Fetched 11 checkouts, 16 transactions
+[2026-02-19 22:03:32] INFO     datamatcher | Fetch complete: 1/1 clients successful
+[2026-02-19 22:03:32] INFO     datamatcher | Starting matching for 1 clients (workers=12)...
+[2026-02-19 22:03:32] INFO     datamatcher | [LRBT] Matched: 11, Unmatched: 0, Rate: 100.0%
+[2026-02-19 22:03:32] INFO     datamatcher | Matching complete: 11 matched, 0 unmatched across all clients
+[2026-02-19 22:03:32] INFO     datamatcher | Reports saved to D:\projects\python\dataMatching\reports\20260219_220332
+[2026-02-19 22:03:39] INFO     datamatcher | Email sent to ['usman@youronlineconversation.com']
+[2026-02-19 22:03:39] INFO     datamatcher | PIPELINE COMPLETE in 7.61s
+[2026-02-19 22:03:49] INFO     datamatcher | ============================================================
+[2026-02-19 22:03:49] INFO     datamatcher | PIPELINE START - 3 clients, 2 days
+[2026-02-19 22:03:49] INFO     datamatcher | ============================================================
+[2026-02-19 22:03:49] INFO     datamatcher | Starting fetch for 3/3 enabled clients...
+[2026-02-19 22:03:49] INFO     datamatcher | [OINUSA] Fetching data (last 2 days)...
+[2026-02-19 22:03:49] INFO     datamatcher | [MAUSA] Fetching data (last 2 days)...
+[2026-02-19 22:03:49] INFO     datamatcher | [LRBT] Fetching data (last 2 days)...
+[2026-02-19 22:03:50] INFO     datamatcher | [LRBT] Fetched 11 checkouts, 16 transactions
+[2026-02-19 22:03:50] INFO     datamatcher | [OINUSA] Fetched 61 checkouts, 133 transactions
+[2026-02-19 22:03:50] INFO     datamatcher | [MAUSA] Fetched 132 checkouts, 295 transactions
+[2026-02-19 22:03:50] INFO     datamatcher | Fetch complete: 3/3 clients successful
+[2026-02-19 22:03:50] INFO     datamatcher | Starting matching for 3 clients (workers=12)...
+[2026-02-19 22:03:50] INFO     datamatcher | [OINUSA] Matched: 61, Unmatched: 0, Rate: 100.0%
+[2026-02-19 22:03:50] INFO     datamatcher | [MAUSA] Matched: 123, Unmatched: 9, Rate: 93.2%
+[2026-02-19 22:03:50] INFO     datamatcher | [LRBT] Matched: 11, Unmatched: 0, Rate: 100.0%
+[2026-02-19 22:03:50] INFO     datamatcher | Matching complete: 195 matched, 9 unmatched across all clients
+[2026-02-19 22:03:50] INFO     datamatcher | Reports saved to D:\projects\python\dataMatching\reports\20260219_220350
+[2026-02-19 22:03:56] INFO     datamatcher | Email sent to ['usman@youronlineconversation.com']
+[2026-02-19 22:03:56] INFO     datamatcher | PIPELINE COMPLETE in 6.82s
+[2026-02-19 22:35:41] INFO     datamatcher | ============================================================
+[2026-02-19 22:35:41] INFO     datamatcher | PIPELINE START - 4 clients, 2 days
+[2026-02-19 22:35:41] INFO     datamatcher | ============================================================
+[2026-02-19 22:35:41] INFO     datamatcher | Starting fetch for 4/4 enabled clients...
+[2026-02-19 22:35:41] INFO     datamatcher | [OINUSA] Fetching data (last 2 days)...
+[2026-02-19 22:35:41] INFO     datamatcher | [MAUSA] Fetching data (last 2 days)...
+[2026-02-19 22:35:41] INFO     datamatcher | [LRBT] Fetching data (last 2 days)...
+[2026-02-19 22:35:41] INFO     datamatcher | [ACC] Fetching data (last 2 days)...
+[2026-02-19 22:35:42] INFO     datamatcher | [LRBT] Fetched 11 checkouts, 16 transactions
+[2026-02-19 22:35:42] ERROR    datamatcher | [ACC] Fetch failed: HTTP 500 from https://acceducate.org/backend/dataManagement/get_transactions.php
+[2026-02-19 22:35:42] INFO     datamatcher | [OINUSA] Fetched 60 checkouts, 132 transactions
+[2026-02-19 22:35:42] INFO     datamatcher | [MAUSA] Fetched 132 checkouts, 297 transactions
+[2026-02-19 22:35:42] INFO     datamatcher | Fetch complete: 3/4 clients successful
+[2026-02-19 22:35:42] INFO     datamatcher | Starting matching for 4 clients (workers=12)...
+[2026-02-19 22:35:42] INFO     datamatcher | [OINUSA] Matched: 60, Unmatched: 0, Rate: 100.0%
+[2026-02-19 22:35:42] INFO     datamatcher | [MAUSA] Matched: 123, Unmatched: 9, Rate: 93.2%
+[2026-02-19 22:35:42] INFO     datamatcher | [LRBT] Matched: 11, Unmatched: 0, Rate: 100.0%
+[2026-02-19 22:35:42] INFO     datamatcher | Matching complete: 194 matched, 9 unmatched across all clients
+[2026-02-19 22:35:42] INFO     datamatcher | Reports saved to D:\projects\python\dataMatching\reports\20260219_223542
+[2026-02-19 22:35:48] INFO     datamatcher | Email sent to ['usman@youronlineconversation.com']
+[2026-02-19 22:35:48] INFO     datamatcher | PIPELINE COMPLETE in 7.25s
+[2026-02-19 22:37:09] INFO     datamatcher | ============================================================
+[2026-02-19 22:37:09] INFO     datamatcher | PIPELINE START - 4 clients, 2 days
+[2026-02-19 22:37:09] INFO     datamatcher | ============================================================
+[2026-02-19 22:37:09] INFO     datamatcher | Starting fetch for 4/4 enabled clients...
+[2026-02-19 22:37:09] INFO     datamatcher | [OINUSA] Fetching data (last 2 days)...
+[2026-02-19 22:37:09] INFO     datamatcher | [MAUSA] Fetching data (last 2 days)...
+[2026-02-19 22:37:09] INFO     datamatcher | [LRBT] Fetching data (last 2 days)...
+[2026-02-19 22:37:09] INFO     datamatcher | [ACC] Fetching data (last 2 days)...
+[2026-02-19 22:37:09] INFO     datamatcher | [LRBT] Fetched 11 checkouts, 16 transactions
+[2026-02-19 22:37:10] INFO     datamatcher | [ACC] Fetched 0 checkouts, 17 transactions
+[2026-02-19 22:37:10] INFO     datamatcher | [OINUSA] Fetched 60 checkouts, 132 transactions
+[2026-02-19 22:37:10] INFO     datamatcher | [MAUSA] Fetched 132 checkouts, 297 transactions
+[2026-02-19 22:37:10] INFO     datamatcher | Fetch complete: 4/4 clients successful
+[2026-02-19 22:37:10] INFO     datamatcher | Starting matching for 4 clients (workers=12)...
+[2026-02-19 22:37:10] INFO     datamatcher | [OINUSA] Matched: 60, Unmatched: 0, Rate: 100.0%
+[2026-02-19 22:37:10] INFO     datamatcher | [MAUSA] Matched: 123, Unmatched: 9, Rate: 93.2%
+[2026-02-19 22:37:10] INFO     datamatcher | [LRBT] Matched: 11, Unmatched: 0, Rate: 100.0%
+[2026-02-19 22:37:10] INFO     datamatcher | [ACC] Matched: 0, Unmatched: 0, Rate: 0.0%
+[2026-02-19 22:37:10] INFO     datamatcher | Matching complete: 194 matched, 9 unmatched across all clients
+[2026-02-19 22:37:10] INFO     datamatcher | Reports saved to D:\projects\python\dataMatching\reports\20260219_223710
+[2026-02-19 22:37:15] INFO     datamatcher | Email sent to ['usman@youronlineconversation.com']
+[2026-02-19 22:37:15] INFO     datamatcher | PIPELINE COMPLETE in 5.72s
+[2026-02-19 23:02:21] INFO     datamatcher | ============================================================
+[2026-02-19 23:02:21] INFO     datamatcher | PIPELINE START - 4 clients, 30 days
+[2026-02-19 23:02:21] INFO     datamatcher | ============================================================
+[2026-02-19 23:02:21] INFO     datamatcher | Starting fetch for 4/4 enabled clients...
+[2026-02-19 23:02:21] INFO     datamatcher | [OINUSA] Fetching data (last 30 days)...
+[2026-02-19 23:02:21] INFO     datamatcher | [MAUSA] Fetching data (last 30 days)...
+[2026-02-19 23:02:21] INFO     datamatcher | [LRBT] Fetching data (last 30 days)...
+[2026-02-19 23:02:21] INFO     datamatcher | [ACC] Fetching data (last 30 days)...
+[2026-02-19 23:02:22] INFO     datamatcher | [ACC] Fetched 0 checkouts, 73 transactions
+[2026-02-19 23:02:22] INFO     datamatcher | [LRBT] Fetched 86 checkouts, 143 transactions
+[2026-02-19 23:02:22] INFO     datamatcher | [MAUSA] Fetched 727 checkouts, 2727 transactions
+[2026-02-19 23:02:23] INFO     datamatcher | [OINUSA] Fetched 480 checkouts, 1593 transactions
+[2026-02-19 23:02:23] INFO     datamatcher | Fetch complete: 4/4 clients successful
+[2026-02-19 23:02:23] INFO     datamatcher | Starting matching for 4 clients (workers=12)...
+[2026-02-19 23:02:23] INFO     datamatcher | [OINUSA] Matched: 480, Unmatched: 0, Rate: 100.0%
+[2026-02-19 23:02:23] INFO     datamatcher | [MAUSA] Matched: 710, Unmatched: 17, Rate: 97.7%
+[2026-02-19 23:02:23] INFO     datamatcher | [LRBT] Matched: 86, Unmatched: 0, Rate: 100.0%
+[2026-02-19 23:02:23] INFO     datamatcher | [ACC] Matched: 0, Unmatched: 0, Rate: 0.0%
+[2026-02-19 23:02:23] INFO     datamatcher | Matching complete: 1276 matched, 17 unmatched across all clients
+[2026-02-19 23:02:23] INFO     datamatcher | Reports saved to D:\projects\python\dataMatching\reports\20260219_230223
+[2026-02-19 23:02:28] INFO     datamatcher | Email sent to ['usman@youronlineconversation.com']
+[2026-02-19 23:02:28] INFO     datamatcher | PIPELINE COMPLETE in 7.40s
+[2026-02-19 23:53:52] INFO     datamatcher | ============================================================
+[2026-02-19 23:53:52] INFO     datamatcher | PIPELINE START - 5 clients, 2 days
+[2026-02-19 23:53:52] INFO     datamatcher | ============================================================
+[2026-02-19 23:53:52] INFO     datamatcher | Starting fetch for 5/5 enabled clients...
+[2026-02-19 23:53:52] INFO     datamatcher | [OINUSA] Fetching data (last 2 days)...
+[2026-02-19 23:53:52] INFO     datamatcher | [MAUSA] Fetching data (last 2 days)...
+[2026-02-19 23:53:52] INFO     datamatcher | [LRBT] Fetching data (last 2 days)...
+[2026-02-19 23:53:52] INFO     datamatcher | [ACC] Fetching data (last 2 days)...
+[2026-02-19 23:53:52] INFO     datamatcher | [OININDIA] Fetching data (last 2 days)...
+[2026-02-19 23:53:53] INFO     datamatcher | [ACC] Fetched 0 checkouts, 18 transactions
+[2026-02-19 23:53:53] INFO     datamatcher | [OINUSA] Fetched 58 checkouts, 133 transactions
+[2026-02-19 23:53:53] INFO     datamatcher | [OININDIA] Fetched 3 checkouts, 3 transactions
+[2026-02-19 23:53:53] INFO     datamatcher | [LRBT] Fetched 10 checkouts, 15 transactions
+[2026-02-19 23:53:53] INFO     datamatcher | [MAUSA] Fetched 135 checkouts, 304 transactions
+[2026-02-19 23:53:53] INFO     datamatcher | Fetch complete: 5/5 clients successful
+[2026-02-19 23:53:53] INFO     datamatcher | Starting matching for 5 clients (workers=12)...
+[2026-02-19 23:53:53] INFO     datamatcher | [OINUSA] Matched: 58, Unmatched: 0, Rate: 100.0%
+[2026-02-19 23:53:53] INFO     datamatcher | [MAUSA] Matched: 125, Unmatched: 10, Rate: 92.6%
+[2026-02-19 23:53:53] INFO     datamatcher | [LRBT] Matched: 10, Unmatched: 0, Rate: 100.0%
+[2026-02-19 23:53:53] INFO     datamatcher | [ACC] Matched: 0, Unmatched: 0, Rate: 0.0%
+[2026-02-19 23:53:53] INFO     datamatcher | [OININDIA] Matched: 3, Unmatched: 0, Rate: 100.0%
+[2026-02-19 23:53:53] INFO     datamatcher | Matching complete: 196 matched, 10 unmatched across all clients
+[2026-02-19 23:53:53] INFO     datamatcher | Reports saved to D:\projects\python\dataMatching\reports\20260219_235353
+[2026-02-19 23:53:59] INFO     datamatcher | Email sent to ['usman@youronlineconversation.com']
+[2026-02-19 23:53:59] INFO     datamatcher | PIPELINE COMPLETE in 6.86s
+[2026-02-19 23:54:07] INFO     datamatcher | ============================================================
+[2026-02-19 23:54:07] INFO     datamatcher | PIPELINE START - 5 clients, 30 days
+[2026-02-19 23:54:07] INFO     datamatcher | ============================================================
+[2026-02-19 23:54:07] INFO     datamatcher | Starting fetch for 5/5 enabled clients...
+[2026-02-19 23:54:07] INFO     datamatcher | [OINUSA] Fetching data (last 30 days)...
+[2026-02-19 23:54:07] INFO     datamatcher | [MAUSA] Fetching data (last 30 days)...
+[2026-02-19 23:54:07] INFO     datamatcher | [LRBT] Fetching data (last 30 days)...
+[2026-02-19 23:54:07] INFO     datamatcher | [ACC] Fetching data (last 30 days)...
+[2026-02-19 23:54:07] INFO     datamatcher | [OININDIA] Fetching data (last 30 days)...
+[2026-02-19 23:54:07] INFO     datamatcher | [LRBT] Fetched 87 checkouts, 144 transactions
+[2026-02-19 23:54:08] INFO     datamatcher | [OININDIA] Fetched 4 checkouts, 4 transactions
+[2026-02-19 23:54:08] INFO     datamatcher | [ACC] Fetched 0 checkouts, 74 transactions
+[2026-02-19 23:54:09] INFO     datamatcher | [MAUSA] Fetched 731 checkouts, 2731 transactions
+[2026-02-19 23:54:09] INFO     datamatcher | [OINUSA] Fetched 480 checkouts, 1594 transactions
+[2026-02-19 23:54:09] INFO     datamatcher | Fetch complete: 5/5 clients successful
+[2026-02-19 23:54:09] INFO     datamatcher | Starting matching for 5 clients (workers=12)...
+[2026-02-19 23:54:09] INFO     datamatcher | [OINUSA] Matched: 480, Unmatched: 0, Rate: 100.0%
+[2026-02-19 23:54:09] INFO     datamatcher | [MAUSA] Matched: 713, Unmatched: 18, Rate: 97.5%
+[2026-02-19 23:54:09] INFO     datamatcher | [LRBT] Matched: 87, Unmatched: 0, Rate: 100.0%
+[2026-02-19 23:54:09] INFO     datamatcher | [OININDIA] Matched: 4, Unmatched: 0, Rate: 100.0%
+[2026-02-19 23:54:09] INFO     datamatcher | [ACC] Matched: 0, Unmatched: 0, Rate: 0.0%
+[2026-02-19 23:54:09] INFO     datamatcher | Matching complete: 1284 matched, 18 unmatched across all clients
+[2026-02-19 23:54:09] INFO     datamatcher | Reports saved to D:\projects\python\dataMatching\reports\20260219_235409
+[2026-02-19 23:54:14] INFO     datamatcher | Email sent to ['usman@youronlineconversation.com']
+[2026-02-19 23:54:14] INFO     datamatcher | PIPELINE COMPLETE in 6.81s
+[2026-02-19 23:54:42] INFO     datamatcher | Shutting down

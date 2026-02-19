@@ -5,13 +5,34 @@
             "base_url": "https://oinusa.org/api/dataManagement",
             "api_key": "BsMmyS8Ckl0AvQbixEyREFiRHbpig3lX",
             "table_prefix": "pw_",
-            "enabled": false
+            "enabled": true
         },
         {
             "name": "MAUSA",
             "base_url": "https://www.mausa.org/api/dataManagement",
             "api_key": "C98byYUHGhpWpGz7ASwB5IEICD1ZBDiK",
             "table_prefix": "pw_",
+            "enabled": true
+        },
+        {
+            "name": "LRBT",
+            "base_url": "https://lrbt.org.uk/backend/dataManagement",
+            "api_key": "xZ0oRL07OEIBUG5PO9J39H1RIP0ZJHk3",
+            "table_prefix": "wp_yoc_",
+            "enabled": true
+        },
+        {
+            "name": "ACC",
+            "base_url": "https://acceducate.org/backend/dataManagement",
+            "api_key": "iHZaekVdxHckp8MLK23hKa11vjbqv6K2",
+            "table_prefix": "wp_yoc_",
+            "enabled": true
+        },
+        {
+            "name": "OININDIA",
+            "base_url": "https://www.orphansinneed.in/api/dataManagement",
+            "api_key": "PEiAaM9t9Hu5P1DQdGHjX8R6nB6O62g2",
+            "table_prefix": "wp_yoc_",
             "enabled": true
         }
     ],
