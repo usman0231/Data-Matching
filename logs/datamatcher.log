@@ -100,3 +100,5 @@
 [2026-02-19 20:09:46] INFO     datamatcher | PIPELINE COMPLETE in 6.13s
 [2026-02-19 20:15:42] INFO     datamatcher | Shutting down
 >>>>>>> 033b7e96a6e02d8cfcdd50793a0b9a75f0c6d11e
+[2026-02-19 20:17:56] INFO     datamatcher | Loaded config: 2 clients, 2 days lookback
+[2026-02-19 20:19:35] INFO     datamatcher | Shutting down

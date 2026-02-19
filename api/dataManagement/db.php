@@ -10,10 +10,11 @@ if (!file_exists($env_path)) {
 
 $env = [];
 foreach (file($env_path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) as $line) {
-    if (str_starts_with(trim($line), '#')) continue;
+    $line = trim($line);
+    if ($line === '' || $line[0] === '#') continue;
     if (strpos($line, '=') === false) continue;
-    [$key, $val] = explode('=', $line, 2);
-    $env[trim($key)] = trim($val);
+    $parts = explode('=', $line, 2);
+    $env[trim($parts[0])] = trim($parts[1]);
 }
 
 $db_host = $env['DB_HOST'] ?? 'localhost';
