@@ -1,0 +1,27 @@
+# Reports & data files
+*.zip
+*.rar
+*.csv
+*.xlsx
+*.xls
+
+# Generated reports
+reports/
+
+# Logs
+logs/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+
+# Environment
+.env
+*.env
+
+# IDE
+.vscode/
+.idea/

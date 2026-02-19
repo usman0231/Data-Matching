@@ -19,7 +19,9 @@ $limit = isset($_GET['limit']) ? (int)$_GET['limit'] : 5000;
 $limit = min($limit, 10000);
 $offset = ($page - 1) * $limit;
 
-$table = $table_prefix . 'transactions';
+// Use prefix from query param, fallback to db.php default
+$prefix = isset($_GET['prefix']) ? preg_replace('/[^a-zA-Z0-9_]/', '', $_GET['prefix']) : $table_prefix;
+$table = $prefix . 'transactions';
 
 // Get total count
 $count_sql = "SELECT COUNT(*) as total FROM `$table`

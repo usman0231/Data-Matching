@@ -38,7 +38,7 @@ def load_config() -> AppSettings:
         raw = json.load(f)
 
     clients = [
-        ClientConfig(**c) for c in raw.get("clients", []) if c.get("enabled", True)
+        ClientConfig(**c) for c in raw.get("clients", [])
     ]
 
     s = raw.get("settings", {})
@@ -52,3 +52,15 @@ def load_config() -> AppSettings:
         clients=clients,
         email=email_cfg,
     )
+
+
+def load_config_raw() -> dict:
+    """Load raw JSON config for editing."""
+    with open(CONFIG_PATH, "r") as f:
+        return json.load(f)
+
+
+def save_config_raw(data: dict) -> None:
+    """Save raw JSON config back to file."""
+    with open(CONFIG_PATH, "w") as f:
+        json.dump(data, f, indent=4)

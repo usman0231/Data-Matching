@@ -24,6 +24,7 @@ async def _fetch_paginated(
     days: int,
     page_size: int,
     timeout: int,
+    prefix: str = "",
 ) -> list[dict]:
     """Fetch all pages from a paginated API endpoint."""
     all_data = []
@@ -31,6 +32,8 @@ async def _fetch_paginated(
 
     while True:
         params = {"days": days, "page": page, "limit": page_size}
+        if prefix:
+            params["prefix"] = prefix
         headers = {"X-Api-Key": api_key}
 
         async with session.get(
@@ -73,10 +76,12 @@ async def fetch_client_data(
             checkouts_task = _fetch_paginated(
                 session, checkout_url, client.api_key,
                 settings.days, settings.fetch_page_size, settings.request_timeout,
+                prefix=client.table_prefix,
             )
             txns_task = _fetch_paginated(
                 session, txn_url, client.api_key,
                 settings.days, settings.fetch_page_size, settings.request_timeout,
+                prefix=client.table_prefix,
             )
 
             checkouts, txns = await asyncio.gather(checkouts_task, txns_task)

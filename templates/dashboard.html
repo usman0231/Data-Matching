@@ -5,15 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Data Matcher - Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <style>
         .spinner { animation: spin 1s linear infinite; }
         @keyframes spin { to { transform: rotate(360deg); } }
-        [x-cloak] { display: none !important; }
+        .hidden { display: none; }
     </style>
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.0/dist/cdn.min.js"></script>
 </head>
-<body class="bg-gray-950 text-gray-100 min-h-screen" x-data="dashboard()" x-init="init()">
+<body class="bg-gray-950 text-gray-100 min-h-screen">
 
 <!-- Header -->
 <header class="bg-gray-900 border-b border-gray-800 px-6 py-4">
@@ -23,7 +21,8 @@
             <p class="text-gray-400 text-sm">Multi-client payment reconciliation</p>
         </div>
         <div class="flex items-center gap-4">
-            <select x-model="days" class="bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-sm">
+            <a href="/settings" class="bg-gray-800 hover:bg-gray-700 px-4 py-2 rounded-lg text-sm transition-colors">Settings</a>
+            <select id="daysSelect" class="bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-sm">
                 <option value="1">Last 1 Day</option>
                 <option value="2" selected>Last 2 Days</option>
                 <option value="3">Last 3 Days</option>
@@ -31,13 +30,13 @@
                 <option value="14">Last 14 Days</option>
                 <option value="30">Last 30 Days</option>
             </select>
-            <button @click="runMatching()" :disabled="isRunning"
+            <button id="runBtn" onclick="runMatching()"
                 class="bg-blue-600 hover:bg-blue-700 disabled:bg-gray-700 disabled:cursor-not-allowed px-5 py-2 rounded-lg font-medium text-sm transition-colors flex items-center gap-2">
-                <svg x-show="isRunning" class="spinner w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <svg id="runSpinner" class="spinner w-4 h-4 hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                     <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                     <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
                 </svg>
-                <span x-text="isRunning ? 'Running...' : 'Run Matching'"></span>
+                <span id="runBtnText">Run Matching</span>
             </button>
         </div>
     </div>
@@ -47,40 +46,38 @@
 <main class="max-w-7xl mx-auto px-6 py-8">
 
     <!-- Status Banner -->
-    <div x-show="message" x-transition
-         :class="messageType === 'error' ? 'bg-red-900/50 border-red-700' : 'bg-green-900/50 border-green-700'"
-         class="border rounded-lg px-4 py-3 mb-6 flex items-center justify-between">
-        <span x-text="message"></span>
-        <button @click="message=''" class="text-gray-400 hover:text-white">&times;</button>
+    <div id="messageBanner" class="border rounded-lg px-4 py-3 mb-6 items-center justify-between hidden">
+        <span id="messageText"></span>
+        <button onclick="document.getElementById('messageBanner').classList.add('hidden')" class="text-gray-400 hover:text-white">&times;</button>
     </div>
 
     <!-- No Data State -->
-    <div x-show="!lastRun && !isRunning" class="text-center py-20">
+    <div id="noDataState" class="text-center py-20">
         <div class="text-gray-600 text-6xl mb-4">&#9881;</div>
         <h2 class="text-xl font-semibold text-gray-300 mb-2">No Data Yet</h2>
         <p class="text-gray-500 mb-6">Click "Run Matching" to start the reconciliation pipeline</p>
     </div>
 
     <!-- Dashboard Content -->
-    <div x-show="lastRun" x-cloak>
+    <div id="dashboardContent" class="hidden">
 
         <!-- Summary Cards -->
         <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
             <div class="bg-gray-900 rounded-xl border border-gray-800 p-5">
                 <div class="text-gray-400 text-sm mb-1">Total Matched</div>
-                <div class="text-3xl font-bold text-green-400" x-text="lastRun?.totals?.matched || 0"></div>
+                <div id="totalMatched" class="text-3xl font-bold text-green-400">0</div>
             </div>
             <div class="bg-gray-900 rounded-xl border border-gray-800 p-5">
                 <div class="text-gray-400 text-sm mb-1">Total Unmatched</div>
-                <div class="text-3xl font-bold text-red-400" x-text="lastRun?.totals?.unmatched || 0"></div>
+                <div id="totalUnmatched" class="text-3xl font-bold text-red-400">0</div>
             </div>
             <div class="bg-gray-900 rounded-xl border border-gray-800 p-5">
                 <div class="text-gray-400 text-sm mb-1">Clients Processed</div>
-                <div class="text-3xl font-bold text-blue-400" x-text="lastRun?.clients?.length || 0"></div>
+                <div id="totalClients" class="text-3xl font-bold text-blue-400">0</div>
             </div>
             <div class="bg-gray-900 rounded-xl border border-gray-800 p-5">
                 <div class="text-gray-400 text-sm mb-1">Time Elapsed</div>
-                <div class="text-3xl font-bold text-purple-400" x-text="(lastRun?.elapsed_seconds || 0) + 's'"></div>
+                <div id="timeElapsed" class="text-3xl font-bold text-purple-400">0s</div>
             </div>
         </div>
 
@@ -88,256 +85,304 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
             <div class="bg-gray-900 rounded-xl border border-gray-800 p-5">
                 <h3 class="text-lg font-semibold mb-4">Match Rate by Client</h3>
-                <canvas id="matchRateChart" height="200"></canvas>
+                <div style="position:relative; height:250px;">
+                    <canvas id="matchRateChart"></canvas>
+                </div>
             </div>
             <div class="bg-gray-900 rounded-xl border border-gray-800 p-5">
                 <h3 class="text-lg font-semibold mb-4">Overall Distribution</h3>
-                <canvas id="overallChart" height="200"></canvas>
+                <div style="position:relative; height:250px;">
+                    <canvas id="overallChart"></canvas>
+                </div>
             </div>
         </div>
 
-        <!-- Per-Client Details -->
+        <!-- Filters -->
         <div class="mb-6 flex items-center gap-4">
             <h3 class="text-lg font-semibold">Client Details</h3>
-            <!-- Client Filter -->
-            <select x-model="selectedClient" class="bg-gray-800 border border-gray-700 rounded-lg px-3 py-1.5 text-sm">
+            <select id="clientFilter" onchange="renderClients()" class="bg-gray-800 border border-gray-700 rounded-lg px-3 py-1.5 text-sm">
                 <option value="all">All Clients</option>
-                <template x-for="client in lastRun?.clients || []" :key="client.name">
-                    <option :value="client.name" x-text="client.name"></option>
-                </template>
             </select>
-            <!-- Status Filter -->
-            <select x-model="statusFilter" class="bg-gray-800 border border-gray-700 rounded-lg px-3 py-1.5 text-sm">
+            <select id="statusFilter" onchange="renderClients()" class="bg-gray-800 border border-gray-700 rounded-lg px-3 py-1.5 text-sm">
                 <option value="all">All Status</option>
                 <option value="unmatched">Unmatched Only</option>
                 <option value="errors">Errors Only</option>
             </select>
-            <!-- Search -->
-            <input type="text" x-model="searchQuery" placeholder="Search email, order, PI..."
+            <input type="text" id="searchInput" oninput="renderClients()" placeholder="Search email, order, PI..."
                    class="bg-gray-800 border border-gray-700 rounded-lg px-3 py-1.5 text-sm w-64">
         </div>
 
-        <!-- Client Cards -->
-        <template x-for="client in filteredClients" :key="client.name">
+        <!-- Client Cards Container -->
+        <div id="clientCards"></div>
+    </div>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script>
+// ─── State ──────────────────────────────────────────────
+let lastRun = null;
+let isRunning = false;
+let matchRateChart = null;
+let overallChart = null;
+let expandedClients = {};
+
+// ─── Init ───────────────────────────────────────────────
+(async function init() {
+    try {
+        const resp = await fetch('/api/status');
+        const data = await resp.json();
+        if (data.last_run) {
+            lastRun = data.last_run;
+            showDashboard();
+        }
+    } catch(e) {
+        console.error('Init failed:', e);
+    }
+})();
+
+// ─── Run Matching ───────────────────────────────────────
+async function runMatching() {
+    if (isRunning) return;
+    isRunning = true;
+    updateRunButton();
+    hideMessage();
+
+    const days = document.getElementById('daysSelect').value;
+
+    try {
+        const resp = await fetch(`/api/run-sync?days=${days}`, { method: 'POST' });
+        const data = await resp.json();
+        if (data.error) {
+            showMessage(data.error, 'error');
+        } else {
+            lastRun = data;
+            showMessage(
+                `Completed in ${data.elapsed_seconds}s - ${data.totals.matched} matched, ${data.totals.unmatched} unmatched`,
+                'success'
+            );
+            showDashboard();
+        }
+    } catch (e) {
+        showMessage('Request failed: ' + e.message, 'error');
+    } finally {
+        isRunning = false;
+        updateRunButton();
+    }
+}
+
+// ─── Show Dashboard ─────────────────────────────────────
+function showDashboard() {
+    if (!lastRun) return;
+
+    document.getElementById('noDataState').classList.add('hidden');
+    document.getElementById('dashboardContent').classList.remove('hidden');
+
+    // Summary cards
+    document.getElementById('totalMatched').textContent = lastRun.totals.matched;
+    document.getElementById('totalUnmatched').textContent = lastRun.totals.unmatched;
+    document.getElementById('totalClients').textContent = lastRun.clients.length;
+    document.getElementById('timeElapsed').textContent = lastRun.elapsed_seconds + 's';
+
+    // Client filter dropdown
+    const clientFilter = document.getElementById('clientFilter');
+    clientFilter.innerHTML = '<option value="all">All Clients</option>';
+    lastRun.clients.forEach(c => {
+        clientFilter.innerHTML += `<option value="${c.name}">${c.name}</option>`;
+    });
+
+    // Render charts and client cards
+    renderCharts();
+    renderClients();
+}
+
+// ─── Charts ─────────────────────────────────────────────
+function renderCharts() {
+    if (!lastRun?.clients) return;
+
+    const ctx1 = document.getElementById('matchRateChart');
+    const ctx2 = document.getElementById('overallChart');
+
+    if (!ctx1 || !ctx2) {
+        console.error('Canvas elements not found');
+        return;
+    }
+
+    if (matchRateChart) { matchRateChart.destroy(); matchRateChart = null; }
+    if (overallChart) { overallChart.destroy(); overallChart = null; }
+
+    const clients = lastRun.clients;
+
+    matchRateChart = new Chart(ctx1, {
+        type: 'bar',
+        data: {
+            labels: clients.map(c => c.name),
+            datasets: [
+                {
+                    label: 'Matched',
+                    data: clients.map(c => c.matched),
+                    backgroundColor: 'rgba(34, 197, 94, 0.7)',
+                    borderRadius: 4,
+                },
+                {
+                    label: 'Unmatched',
+                    data: clients.map(c => c.unmatched),
+                    backgroundColor: 'rgba(239, 68, 68, 0.7)',
+                    borderRadius: 4,
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { labels: { color: '#9ca3af' } } },
+            scales: {
+                x: { ticks: { color: '#9ca3af' }, grid: { color: '#1f2937' } },
+                y: { ticks: { color: '#9ca3af' }, grid: { color: '#1f2937' } }
+            }
+        }
+    });
+
+    overallChart = new Chart(ctx2, {
+        type: 'doughnut',
+        data: {
+            labels: ['Matched', 'Unmatched'],
+            datasets: [{
+                data: [lastRun.totals.matched, lastRun.totals.unmatched],
+                backgroundColor: ['rgba(34, 197, 94, 0.8)', 'rgba(239, 68, 68, 0.8)'],
+                borderWidth: 0,
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { labels: { color: '#9ca3af' } } }
+        }
+    });
+}
+
+// ─── Client Cards ───────────────────────────────────────
+function renderClients() {
+    if (!lastRun?.clients) return;
+
+    const clientFilter = document.getElementById('clientFilter').value;
+    const statusFilter = document.getElementById('statusFilter').value;
+    const search = document.getElementById('searchInput').value.toLowerCase();
+
+    let clients = lastRun.clients.filter(c => {
+        if (clientFilter !== 'all' && c.name !== clientFilter) return false;
+        if (statusFilter === 'errors' && !c.error) return false;
+        if (statusFilter === 'unmatched' && c.unmatched === 0) return false;
+        return true;
+    });
+
+    const container = document.getElementById('clientCards');
+    container.innerHTML = '';
+
+    clients.forEach(client => {
+        const isExpanded = expandedClients[client.name] || false;
+        const statusDot = client.error ? 'bg-red-500' : 'bg-green-500';
+
+        let records = client.unmatched_records || [];
+        if (search) {
+            records = records.filter(r =>
+                String(r.donor_email || '').toLowerCase().includes(search) ||
+                String(r.order_no || '').toLowerCase().includes(search) ||
+                String(r.payment_intent || '').toLowerCase().includes(search) ||
+                String(r.invoiceid || '').toLowerCase().includes(search) ||
+                String(r.donor_name || '').toLowerCase().includes(search)
+            );
+        }
+
+        let tableHTML = '';
+        if (client.error) {
+            tableHTML = `<div class="px-5 py-3 bg-red-900/30 text-red-300 text-sm">Error: ${client.error}</div>`;
+        } else if (records.length > 0) {
+            tableHTML = `<div class="overflow-x-auto"><table class="w-full text-sm">
+                <thead class="bg-gray-800/50"><tr>
+                    <th class="px-4 py-2 text-left text-gray-400">ID</th>
+                    <th class="px-4 py-2 text-left text-gray-400">Invoice</th>
+                    <th class="px-4 py-2 text-left text-gray-400">Order No</th>
+                    <th class="px-4 py-2 text-left text-gray-400">Payment Intent</th>
+                    <th class="px-4 py-2 text-left text-gray-400">Status</th>
+                    <th class="px-4 py-2 text-left text-gray-400">Amount</th>
+                    <th class="px-4 py-2 text-left text-gray-400">Donor</th>
+                    <th class="px-4 py-2 text-left text-gray-400">Email</th>
+                    <th class="px-4 py-2 text-left text-gray-400">Created</th>
+                </tr></thead><tbody>` +
+                records.map(r => {
+                    const statusClass = r.payment_status === 'succeeded'
+                        ? 'bg-green-900 text-green-300' : 'bg-yellow-900 text-yellow-300';
+                    return `<tr class="border-t border-gray-800/50 hover:bg-gray-800/30">
+                        <td class="px-4 py-2">${r.id || ''}</td>
+                        <td class="px-4 py-2">${r.invoiceid || ''}</td>
+                        <td class="px-4 py-2">${r.order_no || ''}</td>
+                        <td class="px-4 py-2 font-mono text-xs">${r.payment_intent || ''}</td>
+                        <td class="px-4 py-2"><span class="px-2 py-0.5 rounded text-xs ${statusClass}">${r.payment_status || ''}</span></td>
+                        <td class="px-4 py-2">${r.amount || ''} ${r.currency || 'USD'}</td>
+                        <td class="px-4 py-2">${r.donor_name || ''}</td>
+                        <td class="px-4 py-2">${r.donor_email || ''}</td>
+                        <td class="px-4 py-2 text-gray-400">${r.created_at || ''}</td>
+                    </tr>`;
+                }).join('') +
+                `</tbody></table></div>`;
+        } else {
+            tableHTML = `<div class="px-5 py-8 text-center text-gray-500">All records matched successfully</div>`;
+        }
+
+        container.innerHTML += `
             <div class="bg-gray-900 rounded-xl border border-gray-800 mb-4 overflow-hidden">
-                <!-- Client Header -->
-                <div @click="toggleClient(client.name)"
+                <div onclick="toggleClient('${client.name}')"
                      class="px-5 py-4 flex items-center justify-between cursor-pointer hover:bg-gray-800/50 transition-colors">
                     <div class="flex items-center gap-4">
-                        <div class="w-3 h-3 rounded-full" :class="client.error ? 'bg-red-500' : 'bg-green-500'"></div>
+                        <div class="w-3 h-3 rounded-full ${statusDot}"></div>
                         <div>
-                            <span class="font-semibold" x-text="client.name"></span>
-                            <span class="text-gray-500 text-sm ml-2" x-text="'Match Rate: ' + client.match_rate + '%'"></span>
+                            <span class="font-semibold">${client.name}</span>
+                            <span class="text-gray-500 text-sm ml-2">Match Rate: ${client.match_rate}%</span>
                         </div>
                     </div>
                     <div class="flex items-center gap-6 text-sm">
-                        <span class="text-green-400">Matched: <span x-text="client.matched"></span></span>
-                        <span class="text-red-400">Unmatched: <span x-text="client.unmatched"></span></span>
-                        <span class="text-gray-400">Checkouts: <span x-text="client.total_checkouts"></span></span>
-                        <span class="text-gray-400">Txns: <span x-text="client.total_transactions"></span></span>
-                        <svg class="w-5 h-5 text-gray-500 transition-transform" :class="expandedClients[client.name] && 'rotate-180'" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                        <span class="text-green-400">Matched: ${client.matched}</span>
+                        <span class="text-red-400">Unmatched: ${client.unmatched}</span>
+                        <span class="text-gray-400">Checkouts: ${client.total_checkouts}</span>
+                        <span class="text-gray-400">Txns: ${client.total_transactions}</span>
+                        <svg class="w-5 h-5 text-gray-500 transition-transform ${isExpanded ? 'rotate-180' : ''}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                             <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
                         </svg>
                     </div>
                 </div>
-
-                <!-- Unmatched Records Table -->
-                <div x-show="expandedClients[client.name]" x-transition class="border-t border-gray-800">
-                    <div x-show="client.error" class="px-5 py-3 bg-red-900/30 text-red-300 text-sm">
-                        Error: <span x-text="client.error"></span>
-                    </div>
-                    <div x-show="client.unmatched_records?.length > 0" class="overflow-x-auto">
-                        <table class="w-full text-sm">
-                            <thead class="bg-gray-800/50">
-                                <tr>
-                                    <th class="px-4 py-2 text-left text-gray-400">ID</th>
-                                    <th class="px-4 py-2 text-left text-gray-400">Invoice</th>
-                                    <th class="px-4 py-2 text-left text-gray-400">Order No</th>
-                                    <th class="px-4 py-2 text-left text-gray-400">Payment Intent</th>
-                                    <th class="px-4 py-2 text-left text-gray-400">Status</th>
-                                    <th class="px-4 py-2 text-left text-gray-400">Amount</th>
-                                    <th class="px-4 py-2 text-left text-gray-400">Donor</th>
-                                    <th class="px-4 py-2 text-left text-gray-400">Email</th>
-                                    <th class="px-4 py-2 text-left text-gray-400">Created</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <template x-for="rec in filterRecords(client.unmatched_records)" :key="rec.id">
-                                    <tr class="border-t border-gray-800/50 hover:bg-gray-800/30">
-                                        <td class="px-4 py-2" x-text="rec.id"></td>
-                                        <td class="px-4 py-2" x-text="rec.invoiceid"></td>
-                                        <td class="px-4 py-2" x-text="rec.order_no"></td>
-                                        <td class="px-4 py-2 font-mono text-xs" x-text="rec.payment_intent"></td>
-                                        <td class="px-4 py-2">
-                                            <span class="px-2 py-0.5 rounded text-xs"
-                                                  :class="rec.payment_status === 'succeeded' ? 'bg-green-900 text-green-300' : 'bg-yellow-900 text-yellow-300'"
-                                                  x-text="rec.payment_status"></span>
-                                        </td>
-                                        <td class="px-4 py-2" x-text="rec.amount + ' ' + (rec.currency || 'USD')"></td>
-                                        <td class="px-4 py-2" x-text="rec.donor_name"></td>
-                                        <td class="px-4 py-2" x-text="rec.donor_email"></td>
-                                        <td class="px-4 py-2 text-gray-400" x-text="rec.created_at"></td>
-                                    </tr>
-                                </template>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div x-show="!client.unmatched_records?.length && !client.error"
-                         class="px-5 py-8 text-center text-gray-500">
-                        All records matched successfully
-                    </div>
+                <div class="border-t border-gray-800 ${isExpanded ? '' : 'hidden'}" id="client-${client.name.replace(/\s/g,'_')}">
+                    ${tableHTML}
                 </div>
-            </div>
-        </template>
+            </div>`;
+    });
+}
 
-    </div>
-</main>
+function toggleClient(name) {
+    expandedClients[name] = !expandedClients[name];
+    renderClients();
+}
 
-<script>
-function dashboard() {
-    return {
-        days: '2',
-        isRunning: {{ 'true' if is_running else 'false' }},
-        lastRun: {{ last_run | tojson if last_run else 'null' }},
-        message: '',
-        messageType: 'success',
-        selectedClient: 'all',
-        statusFilter: 'all',
-        searchQuery: '',
-        expandedClients: {},
-        matchRateChart: null,
-        overallChart: null,
+// ─── UI Helpers ─────────────────────────────────────────
+function updateRunButton() {
+    const btn = document.getElementById('runBtn');
+    const spinner = document.getElementById('runSpinner');
+    const text = document.getElementById('runBtnText');
+    btn.disabled = isRunning;
+    spinner.classList.toggle('hidden', !isRunning);
+    text.textContent = isRunning ? 'Running...' : 'Run Matching';
+}
 
-        init() {
-            if (this.lastRun) this.renderCharts();
-            // Poll status while running
-            this.$watch('isRunning', (val) => {
-                if (val) this.pollStatus();
-            });
-        },
+function showMessage(msg, type) {
+    const banner = document.getElementById('messageBanner');
+    const text = document.getElementById('messageText');
+    banner.className = `border rounded-lg px-4 py-3 mb-6 flex items-center justify-between ${
+        type === 'error' ? 'bg-red-900/50 border-red-700' : 'bg-green-900/50 border-green-700'
+    }`;
+    text.textContent = msg;
+}
 
-        async runMatching() {
-            this.isRunning = true;
-            this.message = '';
-            try {
-                const resp = await fetch(`/api/run-sync?days=${this.days}`, { method: 'POST' });
-                const data = await resp.json();
-                if (data.error) {
-                    this.message = data.error;
-                    this.messageType = 'error';
-                } else {
-                    this.lastRun = data;
-                    this.message = `Completed in ${data.elapsed_seconds}s - ${data.totals.matched} matched, ${data.totals.unmatched} unmatched`;
-                    this.messageType = 'success';
-                    this.$nextTick(() => this.renderCharts());
-                }
-            } catch (e) {
-                this.message = 'Request failed: ' + e.message;
-                this.messageType = 'error';
-            } finally {
-                this.isRunning = false;
-            }
-        },
-
-        async pollStatus() {
-            while (this.isRunning) {
-                await new Promise(r => setTimeout(r, 2000));
-                try {
-                    const resp = await fetch('/api/status');
-                    const data = await resp.json();
-                    if (!data.is_running && data.last_run) {
-                        this.lastRun = data.last_run;
-                        this.isRunning = false;
-                        this.$nextTick(() => this.renderCharts());
-                    }
-                } catch {}
-            }
-        },
-
-        toggleClient(name) {
-            this.expandedClients[name] = !this.expandedClients[name];
-        },
-
-        get filteredClients() {
-            if (!this.lastRun?.clients) return [];
-            return this.lastRun.clients.filter(c => {
-                if (this.selectedClient !== 'all' && c.name !== this.selectedClient) return false;
-                if (this.statusFilter === 'errors' && !c.error) return false;
-                if (this.statusFilter === 'unmatched' && c.unmatched === 0) return false;
-                return true;
-            });
-        },
-
-        filterRecords(records) {
-            if (!records || !this.searchQuery) return records || [];
-            const q = this.searchQuery.toLowerCase();
-            return records.filter(r =>
-                (r.donor_email || '').toLowerCase().includes(q) ||
-                (r.order_no || '').toLowerCase().includes(q) ||
-                (r.payment_intent || '').toLowerCase().includes(q) ||
-                (r.invoiceid || '').toLowerCase().includes(q) ||
-                (r.donor_name || '').toLowerCase().includes(q)
-            );
-        },
-
-        renderCharts() {
-            if (!this.lastRun?.clients) return;
-            const clients = this.lastRun.clients;
-
-            // Match Rate Chart
-            const ctx1 = document.getElementById('matchRateChart');
-            if (this.matchRateChart) this.matchRateChart.destroy();
-            this.matchRateChart = new Chart(ctx1, {
-                type: 'bar',
-                data: {
-                    labels: clients.map(c => c.name),
-                    datasets: [
-                        {
-                            label: 'Matched',
-                            data: clients.map(c => c.matched),
-                            backgroundColor: 'rgba(34, 197, 94, 0.7)',
-                            borderRadius: 4,
-                        },
-                        {
-                            label: 'Unmatched',
-                            data: clients.map(c => c.unmatched),
-                            backgroundColor: 'rgba(239, 68, 68, 0.7)',
-                            borderRadius: 4,
-                        }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    plugins: { legend: { labels: { color: '#9ca3af' } } },
-                    scales: {
-                        x: { ticks: { color: '#9ca3af' }, grid: { color: '#1f2937' } },
-                        y: { ticks: { color: '#9ca3af' }, grid: { color: '#1f2937' } }
-                    }
-                }
-            });
-
-            // Overall Pie Chart
-            const ctx2 = document.getElementById('overallChart');
-            if (this.overallChart) this.overallChart.destroy();
-            this.overallChart = new Chart(ctx2, {
-                type: 'doughnut',
-                data: {
-                    labels: ['Matched', 'Unmatched'],
-                    datasets: [{
-                        data: [this.lastRun.totals.matched, this.lastRun.totals.unmatched],
-                        backgroundColor: ['rgba(34, 197, 94, 0.8)', 'rgba(239, 68, 68, 0.8)'],
-                        borderWidth: 0,
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    plugins: {
-                        legend: { labels: { color: '#9ca3af' } }
-                    }
-                }
-            });
-        }
-    };
+function hideMessage() {
+    document.getElementById('messageBanner').classList.add('hidden');
 }
 </script>
 </body>

@@ -17,15 +17,17 @@
     ],
     "settings": {
         "days": 2,
-        "max_workers": 4,
-        "fetch_page_size": 5000,
+        "max_workers": 12,
+        "fetch_page_size": 8000,
         "request_timeout": 30,
         "email": {
             "smtp_host": "smtp.gmail.com",
             "smtp_port": 587,
             "sender_email": "webquery@youronlineconversation.com",
             "sender_password": "mqkiekqwsciyegwm",
-            "admin_emails": ["usman@youronlineconversation.com"]
+            "admin_emails": [
+                "usman@youronlineconversation.com"
+            ]
         }
     }
 }

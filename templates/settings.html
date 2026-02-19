@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Matcher - Settings</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .spinner { animation: spin 1s linear infinite; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .hidden { display: none; }
+    </style>
+</head>
+<body class="bg-gray-950 text-gray-100 min-h-screen">
+
+<!-- Header -->
+<header class="bg-gray-900 border-b border-gray-800 px-6 py-4">
+    <div class="max-w-5xl mx-auto flex items-center justify-between">
+        <div>
+            <h1 class="text-2xl font-bold text-white">Settings</h1>
+            <p class="text-gray-400 text-sm">Manage clients and configuration</p>
+        </div>
+        <a href="/" class="bg-gray-800 hover:bg-gray-700 px-4 py-2 rounded-lg text-sm transition-colors">
+            Back to Dashboard
+        </a>
+    </div>
+</header>
+
+<main class="max-w-5xl mx-auto px-6 py-8">
+
+    <!-- Toast -->
+    <div id="toast" class="fixed top-4 right-4 px-5 py-3 rounded-lg text-sm font-medium z-50 hidden transition-all"></div>
+
+    <!-- ─── Clients Section ──────────────────────────────── -->
+    <div class="mb-10">
+        <div class="flex items-center justify-between mb-4">
+            <h2 class="text-xl font-semibold">Clients</h2>
+            <button onclick="openClientModal()" class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg text-sm font-medium transition-colors">
+                + Add Client
+            </button>
+        </div>
+
+        <div id="clientsList" class="space-y-3"></div>
+        <div id="noClients" class="hidden text-center py-10 text-gray-500">No clients configured yet</div>
+    </div>
+
+    <!-- ─── General Settings ─────────────────────────────── -->
+    <div class="mb-10">
+        <h2 class="text-xl font-semibold mb-4">General Settings</h2>
+        <div class="bg-gray-900 rounded-xl border border-gray-800 p-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                <div>
+                    <label class="block text-sm text-gray-400 mb-1">Default Days Lookback</label>
+                    <input type="number" id="settDays" min="1" max="30" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-sm">
+                </div>
+                <div>
+                    <label class="block text-sm text-gray-400 mb-1">Max Workers (Threads)</label>
+                    <input type="number" id="settWorkers" min="1" max="10" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-sm">
+                </div>
+                <div>
+                    <label class="block text-sm text-gray-400 mb-1">Fetch Page Size</label>
+                    <input type="number" id="settPageSize" min="100" max="10000" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-sm">
+                </div>
+                <div>
+                    <label class="block text-sm text-gray-400 mb-1">Request Timeout (seconds)</label>
+                    <input type="number" id="settTimeout" min="5" max="120" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-sm">
+                </div>
+            </div>
+            <button onclick="saveSettings()" class="mt-5 bg-green-600 hover:bg-green-700 px-5 py-2 rounded-lg text-sm font-medium transition-colors">
+                Save Settings
+            </button>
+        </div>
+    </div>
+
+    <!-- ─── Email Settings ───────────────────────────────── -->
+    <div class="mb-10">
+        <h2 class="text-xl font-semibold mb-4">Email Configuration</h2>
+        <div class="bg-gray-900 rounded-xl border border-gray-800 p-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                <div>
+                    <label class="block text-sm text-gray-400 mb-1">SMTP Host</label>
+                    <input type="text" id="emailHost" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-sm">
+                </div>
+                <div>
+                    <label class="block text-sm text-gray-400 mb-1">SMTP Port</label>
+                    <input type="number" id="emailPort" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-sm">
+                </div>
+                <div>
+                    <label class="block text-sm text-gray-400 mb-1">Sender Email</label>
+                    <input type="email" id="emailSender" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-sm">
+                </div>
+                <div>
+                    <label class="block text-sm text-gray-400 mb-1">Sender Password</label>
+                    <input type="password" id="emailPass" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-sm">
+                </div>
+                <div class="md:col-span-2">
+                    <label class="block text-sm text-gray-400 mb-1">Admin Emails (comma separated)</label>
+                    <input type="text" id="emailAdmins" placeholder="admin1@example.com, admin2@example.com" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-sm">
+                </div>
+            </div>
+            <button onclick="saveEmail()" class="mt-5 bg-green-600 hover:bg-green-700 px-5 py-2 rounded-lg text-sm font-medium transition-colors">
+                Save Email Settings
+            </button>
+        </div>
+    </div>
+
+</main>
+
+<!-- ─── Client Modal ─────────────────────────────────────── -->
+<div id="clientModal" class="fixed inset-0 bg-black/60 z-50 flex items-center justify-center hidden">
+    <div class="bg-gray-900 border border-gray-700 rounded-2xl p-6 w-full max-w-lg mx-4">
+        <h3 id="modalTitle" class="text-lg font-semibold mb-5">Add Client</h3>
+        <input type="hidden" id="modalOriginalName" value="">
+        <div class="space-y-4">
+            <div>
+                <label class="block text-sm text-gray-400 mb-1">Client Name</label>
+                <input type="text" id="modalName" placeholder="e.g. OINUSA" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-sm">
+            </div>
+            <div>
+                <label class="block text-sm text-gray-400 mb-1">Base URL</label>
+                <input type="text" id="modalUrl" placeholder="https://example.com/api/dataManagement" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-sm">
+            </div>
+            <div>
+                <label class="block text-sm text-gray-400 mb-1">API Key</label>
+                <input type="text" id="modalApiKey" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-sm">
+            </div>
+            <div>
+                <label class="block text-sm text-gray-400 mb-1">Table Prefix</label>
+                <input type="text" id="modalPrefix" placeholder="pw_" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-sm">
+            </div>
+            <div class="flex items-center gap-2">
+                <input type="checkbox" id="modalEnabled" checked class="rounded bg-gray-800 border-gray-700">
+                <label for="modalEnabled" class="text-sm text-gray-400">Enabled</label>
+            </div>
+        </div>
+        <div class="flex justify-end gap-3 mt-6">
+            <button onclick="closeClientModal()" class="bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-lg text-sm transition-colors">Cancel</button>
+            <button onclick="saveClient()" class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg text-sm font-medium transition-colors">Save</button>
+        </div>
+    </div>
+</div>
+
+<!-- ─── Delete Confirm Modal ─────────────────────────────── -->
+<div id="deleteModal" class="fixed inset-0 bg-black/60 z-50 flex items-center justify-center hidden">
+    <div class="bg-gray-900 border border-gray-700 rounded-2xl p-6 w-full max-w-sm mx-4">
+        <h3 class="text-lg font-semibold mb-2">Delete Client</h3>
+        <p class="text-gray-400 text-sm mb-5">Are you sure you want to delete <strong id="deleteClientName" class="text-white"></strong>?</p>
+        <div class="flex justify-end gap-3">
+            <button onclick="closeDeleteModal()" class="bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-lg text-sm transition-colors">Cancel</button>
+            <button onclick="confirmDelete()" class="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-lg text-sm font-medium transition-colors">Delete</button>
+        </div>
+    </div>
+</div>
+
+<script>
+let config = null;
+let deleteTarget = null;
+
+// ─── Init ───────────────────────────────────────────────
+(async function init() {
+    try {
+        const resp = await fetch('/api/config');
+        config = await resp.json();
+        renderClients();
+        populateSettings();
+        populateEmail();
+    } catch(e) {
+        showToast('Failed to load config: ' + e.message, 'error');
+    }
+})();
+
+// ─── Clients Rendering ─────────────────────────────────
+function renderClients() {
+    const clients = config?.clients || [];
+    const container = document.getElementById('clientsList');
+    const noClients = document.getElementById('noClients');
+
+    if (clients.length === 0) {
+        container.innerHTML = '';
+        noClients.classList.remove('hidden');
+        return;
+    }
+
+    noClients.classList.add('hidden');
+    container.innerHTML = clients.map((c, i) => `
+        <div class="bg-gray-900 rounded-xl border border-gray-800 px-5 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <div class="w-3 h-3 rounded-full ${c.enabled ? 'bg-green-500' : 'bg-gray-600'}"></div>
+                <div>
+                    <div class="font-semibold">${esc(c.name)}</div>
+                    <div class="text-gray-500 text-sm">${esc(c.base_url)}</div>
+                </div>
+            </div>
+            <div class="flex items-center gap-3 text-sm">
+                <span class="text-gray-500">Prefix: <span class="text-gray-300">${esc(c.table_prefix || 'pw_')}</span></span>
+                <span class="text-gray-500">Key: <span class="text-gray-300">${c.api_key ? '***' + c.api_key.slice(-4) : 'none'}</span></span>
+                <button onclick="toggleEnabled(${i})" class="px-3 py-1 rounded text-xs ${c.enabled ? 'bg-green-900 text-green-300' : 'bg-gray-700 text-gray-400'} hover:opacity-80 transition-opacity">
+                    ${c.enabled ? 'Enabled' : 'Disabled'}
+                </button>
+                <button onclick="editClient(${i})" class="bg-gray-700 hover:bg-gray-600 px-3 py-1 rounded text-xs transition-colors">Edit</button>
+                <button onclick="openDeleteModal('${esc(c.name)}')" class="bg-red-900/50 hover:bg-red-900 text-red-300 px-3 py-1 rounded text-xs transition-colors">Delete</button>
+            </div>
+        </div>
+    `).join('');
+}
+
+// ─── Client Modal ───────────────────────────────────────
+function openClientModal(editIndex) {
+    const modal = document.getElementById('clientModal');
+    modal.classList.remove('hidden');
+
+    if (editIndex !== undefined) {
+        const c = config.clients[editIndex];
+        document.getElementById('modalTitle').textContent = 'Edit Client';
+        document.getElementById('modalOriginalName').value = c.name;
+        document.getElementById('modalName').value = c.name;
+        document.getElementById('modalUrl').value = c.base_url;
+        document.getElementById('modalApiKey').value = c.api_key || '';
+        document.getElementById('modalPrefix').value = c.table_prefix || 'pw_';
+        document.getElementById('modalEnabled').checked = c.enabled !== false;
+    } else {
+        document.getElementById('modalTitle').textContent = 'Add Client';
+        document.getElementById('modalOriginalName').value = '';
+        document.getElementById('modalName').value = '';
+        document.getElementById('modalUrl').value = '';
+        document.getElementById('modalApiKey').value = '';
+        document.getElementById('modalPrefix').value = 'pw_';
+        document.getElementById('modalEnabled').checked = true;
+    }
+}
+
+function closeClientModal() {
+    document.getElementById('clientModal').classList.add('hidden');
+}
+
+function editClient(index) {
+    openClientModal(index);
+}
+
+async function saveClient() {
+    const originalName = document.getElementById('modalOriginalName').value;
+    const data = {
+        name: document.getElementById('modalName').value.trim(),
+        base_url: document.getElementById('modalUrl').value.trim(),
+        api_key: document.getElementById('modalApiKey').value.trim(),
+        table_prefix: document.getElementById('modalPrefix').value.trim() || 'pw_',
+        enabled: document.getElementById('modalEnabled').checked,
+    };
+
+    if (!data.name || !data.base_url) {
+        showToast('Name and Base URL are required', 'error');
+        return;
+    }
+
+    try {
+        let resp;
+        if (originalName) {
+            // Update
+            resp = await fetch(`/api/config/clients/${encodeURIComponent(originalName)}`, {
+                method: 'PUT',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(data),
+            });
+        } else {
+            // Add
+            resp = await fetch('/api/config/clients', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(data),
+            });
+        }
+
+        const result = await resp.json();
+        if (!resp.ok) {
+            showToast(result.error || 'Failed to save', 'error');
+            return;
+        }
+
+        showToast(originalName ? 'Client updated' : 'Client added', 'success');
+        closeClientModal();
+        await reloadConfig();
+    } catch(e) {
+        showToast('Error: ' + e.message, 'error');
+    }
+}
+
+async function toggleEnabled(index) {
+    const c = config.clients[index];
+    try {
+        const resp = await fetch(`/api/config/clients/${encodeURIComponent(c.name)}`, {
+            method: 'PUT',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({ enabled: !c.enabled }),
+        });
+        if (resp.ok) {
+            showToast(`${c.name} ${c.enabled ? 'disabled' : 'enabled'}`, 'success');
+            await reloadConfig();
+        }
+    } catch(e) {
+        showToast('Error: ' + e.message, 'error');
+    }
+}
+
+// ─── Delete ─────────────────────────────────────────────
+function openDeleteModal(name) {
+    deleteTarget = name;
+    document.getElementById('deleteClientName').textContent = name;
+    document.getElementById('deleteModal').classList.remove('hidden');
+}
+
+function closeDeleteModal() {
+    document.getElementById('deleteModal').classList.add('hidden');
+    deleteTarget = null;
+}
+
+async function confirmDelete() {
+    if (!deleteTarget) return;
+    try {
+        const resp = await fetch(`/api/config/clients/${encodeURIComponent(deleteTarget)}`, { method: 'DELETE' });
+        if (resp.ok) {
+            showToast(`${deleteTarget} deleted`, 'success');
+            closeDeleteModal();
+            await reloadConfig();
+        } else {
+            const r = await resp.json();
+            showToast(r.error || 'Delete failed', 'error');
+        }
+    } catch(e) {
+        showToast('Error: ' + e.message, 'error');
+    }
+}
+
+// ─── General Settings ───────────────────────────────────
+function populateSettings() {
+    const s = config?.settings || {};
+    document.getElementById('settDays').value = s.days || 2;
+    document.getElementById('settWorkers').value = s.max_workers || 4;
+    document.getElementById('settPageSize').value = s.fetch_page_size || 5000;
+    document.getElementById('settTimeout').value = s.request_timeout || 30;
+}
+
+async function saveSettings() {
+    const data = {
+        days: parseInt(document.getElementById('settDays').value) || 2,
+        max_workers: parseInt(document.getElementById('settWorkers').value) || 4,
+        fetch_page_size: parseInt(document.getElementById('settPageSize').value) || 5000,
+        request_timeout: parseInt(document.getElementById('settTimeout').value) || 30,
+    };
+
+    // Preserve email settings
+    const emailData = config?.settings?.email || {};
+    data.email = emailData;
+
+    try {
+        const resp = await fetch('/api/config/settings', {
+            method: 'PUT',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(data),
+        });
+        if (resp.ok) {
+            showToast('Settings saved', 'success');
+            await reloadConfig();
+        }
+    } catch(e) {
+        showToast('Error: ' + e.message, 'error');
+    }
+}
+
+// ─── Email Settings ─────────────────────────────────────
+function populateEmail() {
+    const e = config?.settings?.email || {};
+    document.getElementById('emailHost').value = e.smtp_host || 'smtp.gmail.com';
+    document.getElementById('emailPort').value = e.smtp_port || 587;
+    document.getElementById('emailSender').value = e.sender_email || '';
+    document.getElementById('emailPass').value = e.sender_password || '';
+    document.getElementById('emailAdmins').value = (e.admin_emails || []).join(', ');
+}
+
+async function saveEmail() {
+    const admins = document.getElementById('emailAdmins').value
+        .split(',').map(e => e.trim()).filter(e => e);
+
+    const s = config?.settings || {};
+    const data = {
+        ...s,
+        email: {
+            smtp_host: document.getElementById('emailHost').value.trim(),
+            smtp_port: parseInt(document.getElementById('emailPort').value) || 587,
+            sender_email: document.getElementById('emailSender').value.trim(),
+            sender_password: document.getElementById('emailPass').value.trim(),
+            admin_emails: admins,
+        }
+    };
+
+    try {
+        const resp = await fetch('/api/config/settings', {
+            method: 'PUT',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(data),
+        });
+        if (resp.ok) {
+            showToast('Email settings saved', 'success');
+            await reloadConfig();
+        }
+    } catch(e) {
+        showToast('Error: ' + e.message, 'error');
+    }
+}
+
+// ─── Helpers ────────────────────────────────────────────
+async function reloadConfig() {
+    const resp = await fetch('/api/config');
+    config = await resp.json();
+    renderClients();
+    populateSettings();
+    populateEmail();
+}
+
+function showToast(msg, type) {
+    const toast = document.getElementById('toast');
+    toast.textContent = msg;
+    toast.className = `fixed top-4 right-4 px-5 py-3 rounded-lg text-sm font-medium z-50 transition-all ${
+        type === 'error' ? 'bg-red-600 text-white' : 'bg-green-600 text-white'
+    }`;
+    setTimeout(() => { toast.classList.add('hidden'); }, 3000);
+}
+
+function esc(str) {
+    const d = document.createElement('div');
+    d.textContent = str || '';
+    return d.innerHTML;
+}
+</script>
+</body>
+</html>

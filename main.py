@@ -17,7 +17,7 @@ from fastapi.templating import Jinja2Templates
 # Add project root to path
 sys.path.insert(0, str(Path(__file__).parent))
 
-from config.settings import load_config, AppSettings
+from config.settings import load_config, load_config_raw, save_config_raw, AppSettings
 from core.fetcher import fetch_all_clients, ClientData
 from core.matcher import match_all_clients, MatchResult
 from core.reporter import generate_reports, send_email_report
@@ -205,6 +205,96 @@ async def get_client_results(client_name: str):
             return client
 
     return JSONResponse({"error": "Client not found"}, status_code=404)
+
+
+@app.get("/settings", response_class=HTMLResponse)
+async def settings_page(request: Request):
+    """Settings management page."""
+    return templates.TemplateResponse("settings.html", {"request": request})
+
+
+# ─── Config CRUD API ─────────────────────────────────────────────
+@app.get("/api/config")
+async def get_config():
+    """Get full config."""
+    return load_config_raw()
+
+
+@app.put("/api/config/settings")
+async def update_settings(request: Request):
+    """Update general settings (days, workers, timeout, email)."""
+    body = await request.json()
+    raw = load_config_raw()
+    raw["settings"] = {**raw.get("settings", {}), **body}
+    save_config_raw(raw)
+    return {"success": True, "settings": raw["settings"]}
+
+
+@app.get("/api/config/clients")
+async def get_clients():
+    """Get all clients."""
+    raw = load_config_raw()
+    return raw.get("clients", [])
+
+
+@app.post("/api/config/clients")
+async def add_client(request: Request):
+    """Add a new client."""
+    body = await request.json()
+    if not body.get("name") or not body.get("base_url"):
+        return JSONResponse({"error": "name and base_url are required"}, status_code=400)
+
+    raw = load_config_raw()
+    clients = raw.get("clients", [])
+
+    # Check duplicate name
+    for c in clients:
+        if c["name"].lower() == body["name"].lower():
+            return JSONResponse({"error": "Client with this name already exists"}, status_code=409)
+
+    new_client = {
+        "name": body["name"],
+        "base_url": body["base_url"],
+        "api_key": body.get("api_key", ""),
+        "table_prefix": body.get("table_prefix", "pw_"),
+        "enabled": body.get("enabled", True),
+    }
+    clients.append(new_client)
+    raw["clients"] = clients
+    save_config_raw(raw)
+    return {"success": True, "client": new_client}
+
+
+@app.put("/api/config/clients/{client_name}")
+async def update_client(client_name: str, request: Request):
+    """Update an existing client."""
+    body = await request.json()
+    raw = load_config_raw()
+    clients = raw.get("clients", [])
+
+    for i, c in enumerate(clients):
+        if c["name"].lower() == client_name.lower():
+            clients[i] = {**c, **body}
+            raw["clients"] = clients
+            save_config_raw(raw)
+            return {"success": True, "client": clients[i]}
+
+    return JSONResponse({"error": "Client not found"}, status_code=404)
+
+
+@app.delete("/api/config/clients/{client_name}")
+async def delete_client(client_name: str):
+    """Delete a client."""
+    raw = load_config_raw()
+    clients = raw.get("clients", [])
+    new_clients = [c for c in clients if c["name"].lower() != client_name.lower()]
+
+    if len(new_clients) == len(clients):
+        return JSONResponse({"error": "Client not found"}, status_code=404)
+
+    raw["clients"] = new_clients
+    save_config_raw(raw)
+    return {"success": True}
 
 
 @app.get("/api/download/{filename}")
