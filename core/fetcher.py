@@ -105,9 +105,10 @@ async def fetch_client_data(
 
 async def fetch_all_clients(settings: AppSettings) -> list[ClientData]:
     """Fetch data from all enabled clients concurrently."""
-    log.info(f"Starting fetch for {len(settings.clients)} clients...")
+    enabled_clients = [c for c in settings.clients if c.enabled]
+    log.info(f"Starting fetch for {len(enabled_clients)}/{len(settings.clients)} enabled clients...")
 
-    tasks = [fetch_client_data(client, settings) for client in settings.clients]
+    tasks = [fetch_client_data(client, settings) for client in enabled_clients]
     results = await asyncio.gather(*tasks)
 
     success = sum(1 for r in results if r.error is None)

@@ -122,7 +122,12 @@
             </div>
             <div>
                 <label class="block text-sm text-gray-400 mb-1">API Key</label>
-                <input type="text" id="modalApiKey" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-sm">
+                <div class="flex gap-2">
+                    <input type="text" id="modalApiKey" class="flex-1 bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-sm">
+                    <button type="button" onclick="generateApiKey()" class="bg-purple-600 hover:bg-purple-700 px-3 py-2 rounded-lg text-xs font-medium transition-colors whitespace-nowrap" title="Auto Generate API Key">
+                        &#x1f511; Generate
+                    </button>
+                </div>
             </div>
             <div>
                 <label class="block text-sm text-gray-400 mb-1">Table Prefix</label>
@@ -405,6 +410,16 @@ async function saveEmail() {
     } catch(e) {
         showToast('Error: ' + e.message, 'error');
     }
+}
+
+// ─── Auto Generate API Key ──────────────────────────────
+function generateApiKey() {
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const array = new Uint8Array(32);
+    crypto.getRandomValues(array);
+    const key = Array.from(array, b => chars[b % chars.length]).join('');
+    document.getElementById('modalApiKey').value = key;
+    showToast('API Key generated', 'success');
 }
 
 // ─── Helpers ────────────────────────────────────────────

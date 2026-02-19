@@ -3,14 +3,14 @@
         {
             "name": "OINUSA",
             "base_url": "https://oinusa.org/api/dataManagement",
-            "api_key": "CHANGE_THIS_SECRET_KEY",
+            "api_key": "BsMmyS8Ckl0AvQbixEyREFiRHbpig3lX",
             "table_prefix": "pw_",
-            "enabled": true
+            "enabled": false
         },
         {
             "name": "MAUSA",
             "base_url": "https://www.mausa.org/api/dataManagement",
-            "api_key": "abc",
+            "api_key": "C98byYUHGhpWpGz7ASwB5IEICD1ZBDiK",
             "table_prefix": "pw_",
             "enabled": true
         }
@@ -24,7 +24,7 @@
             "smtp_host": "smtp.gmail.com",
             "smtp_port": 587,
             "sender_email": "webquery@youronlineconversation.com",
-            "sender_password": "mqkiekqwsciyegwm",
+            "sender_password": "cujazjmtosilasya",
             "admin_emails": [
                 "usman@youronlineconversation.com"
             ]
