@@ -1,0 +1,22 @@
+{
+  "generated_at": "2026-02-19T19:58:26.823995",
+  "total_clients": 1,
+  "overall_summary": {
+    "total_matched": 63,
+    "total_unmatched": 0,
+    "clients_with_errors": 0
+  },
+  "clients": [
+    {
+      "client": "OINUSA",
+      "summary": {
+        "total_checkouts": 63,
+        "total_transactions": 132,
+        "matched": 63,
+        "unmatched": 0,
+        "match_rate": 100.0
+      },
+      "unmatched_records": []
+    }
+  ]
+}
