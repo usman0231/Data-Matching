@@ -10,7 +10,7 @@
         {
             "name": "MAUSA",
             "base_url": "https://www.mausa.org/api/dataManagement",
-            "api_key": "CHANGE_THIS_SECRET_KEY",
+            "api_key": "abc",
             "table_prefix": "pw_",
             "enabled": true
         }

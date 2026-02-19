@@ -2,9 +2,9 @@
 header('Content-Type: application/json');
 require_once __DIR__ . '/db.php';
 
-// Verify API key
-$headers = getallheaders();
-$provided_key = $headers['X-Api-Key'] ?? ($_GET['api_key'] ?? '');
+// Verify API key (case-insensitive header lookup)
+$headers = array_change_key_case(getallheaders(), CASE_LOWER);
+$provided_key = $headers['x-api-key'] ?? ($_GET['api_key'] ?? '');
 if ($provided_key !== $api_key) {
     http_response_code(401);
     echo json_encode(['error' => 'Unauthorized']);

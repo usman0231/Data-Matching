@@ -102,3 +102,129 @@
 >>>>>>> 033b7e96a6e02d8cfcdd50793a0b9a75f0c6d11e
 [2026-02-19 20:17:56] INFO     datamatcher | Loaded config: 2 clients, 2 days lookback
 [2026-02-19 20:19:35] INFO     datamatcher | Shutting down
+[2026-02-19 20:21:14] INFO     datamatcher | Loaded config: 2 clients, 2 days lookback
+[2026-02-19 20:21:20] INFO     datamatcher | ============================================================
+[2026-02-19 20:21:20] INFO     datamatcher | PIPELINE START - 2 clients, 30 days
+[2026-02-19 20:21:20] INFO     datamatcher | ============================================================
+[2026-02-19 20:21:20] INFO     datamatcher | Starting fetch for 2 clients...
+[2026-02-19 20:21:20] INFO     datamatcher | [OINUSA] Fetching data (last 30 days)...
+[2026-02-19 20:21:20] INFO     datamatcher | [MAUSA] Fetching data (last 30 days)...
+[2026-02-19 20:21:21] ERROR    datamatcher | [MAUSA] Fetch failed: HTTP 401 from https://www.mausa.org/api/dataManagement/get_checkout_journey.php
+[2026-02-19 20:21:21] INFO     datamatcher | [OINUSA] Fetched 478 checkouts, 1589 transactions
+[2026-02-19 20:21:21] INFO     datamatcher | Fetch complete: 1/2 clients successful
+[2026-02-19 20:21:21] INFO     datamatcher | Starting matching for 2 clients (workers=4)...
+[2026-02-19 20:21:21] INFO     datamatcher | [OINUSA] Matched: 478, Unmatched: 0, Rate: 100.0%
+[2026-02-19 20:21:21] INFO     datamatcher | Matching complete: 478 matched, 0 unmatched across all clients
+[2026-02-19 20:21:21] INFO     datamatcher | Reports saved to C:\Usman\Project\python\dataMatcher\reports\20260219_202121
+[2026-02-19 20:21:24] ERROR    datamatcher | Email send failed: (535, b'5.7.8 Username and Password not accepted. For more information, go to\n5.7.8  https://support.google.com/mail/?p=BadCredentials d75a77b69052e-50684bb9251sm210407061cf.30 - gsmtp')
+[2026-02-19 20:21:24] INFO     datamatcher | PIPELINE COMPLETE in 4.55s
+[2026-02-19 20:24:44] INFO     datamatcher | ============================================================
+[2026-02-19 20:24:44] INFO     datamatcher | PIPELINE START - 2 clients, 30 days
+[2026-02-19 20:24:44] INFO     datamatcher | ============================================================
+[2026-02-19 20:24:44] INFO     datamatcher | Starting fetch for 2 clients...
+[2026-02-19 20:24:44] INFO     datamatcher | [OINUSA] Fetching data (last 30 days)...
+[2026-02-19 20:24:44] INFO     datamatcher | [MAUSA] Fetching data (last 30 days)...
+[2026-02-19 20:24:45] ERROR    datamatcher | [MAUSA] Fetch failed: HTTP 401 from https://www.mausa.org/api/dataManagement/get_transactions.php
+[2026-02-19 20:24:46] INFO     datamatcher | [OINUSA] Fetched 478 checkouts, 1591 transactions
+[2026-02-19 20:24:46] INFO     datamatcher | Fetch complete: 1/2 clients successful
+[2026-02-19 20:24:46] INFO     datamatcher | Starting matching for 2 clients (workers=4)...
+[2026-02-19 20:24:46] INFO     datamatcher | [OINUSA] Matched: 478, Unmatched: 0, Rate: 100.0%
+[2026-02-19 20:24:46] INFO     datamatcher | Matching complete: 478 matched, 0 unmatched across all clients
+[2026-02-19 20:24:46] INFO     datamatcher | Reports saved to C:\Usman\Project\python\dataMatcher\reports\20260219_202446
+[2026-02-19 20:24:49] ERROR    datamatcher | Email send failed: (535, b'5.7.8 Username and Password not accepted. For more information, go to\n5.7.8  https://support.google.com/mail/?p=BadCredentials 6a1803df08f44-8971cdbd860sm216868786d6.46 - gsmtp')
+[2026-02-19 20:24:49] INFO     datamatcher | PIPELINE COMPLETE in 4.47s
+[2026-02-19 20:25:23] INFO     datamatcher | ============================================================
+[2026-02-19 20:25:23] INFO     datamatcher | PIPELINE START - 2 clients, 30 days
+[2026-02-19 20:25:23] INFO     datamatcher | ============================================================
+[2026-02-19 20:25:23] INFO     datamatcher | Starting fetch for 2 clients...
+[2026-02-19 20:25:23] INFO     datamatcher | [OINUSA] Fetching data (last 30 days)...
+[2026-02-19 20:25:23] INFO     datamatcher | [MAUSA] Fetching data (last 30 days)...
+[2026-02-19 20:25:23] ERROR    datamatcher | [MAUSA] Fetch failed: HTTP 401 from https://www.mausa.org/api/dataManagement/get_transactions.php
+[2026-02-19 20:25:24] INFO     datamatcher | [OINUSA] Fetched 478 checkouts, 1591 transactions
+[2026-02-19 20:25:24] INFO     datamatcher | Fetch complete: 1/2 clients successful
+[2026-02-19 20:25:24] INFO     datamatcher | Starting matching for 2 clients (workers=4)...
+[2026-02-19 20:25:24] INFO     datamatcher | [OINUSA] Matched: 478, Unmatched: 0, Rate: 100.0%
+[2026-02-19 20:25:24] INFO     datamatcher | Matching complete: 478 matched, 0 unmatched across all clients
+[2026-02-19 20:25:24] INFO     datamatcher | Reports saved to C:\Usman\Project\python\dataMatcher\reports\20260219_202524
+[2026-02-19 20:25:27] ERROR    datamatcher | Email send failed: (535, b'5.7.8 Username and Password not accepted. For more information, go to\n5.7.8  https://support.google.com/mail/?p=BadCredentials 6a1803df08f44-8971cc95acasm217562666d6.18 - gsmtp')
+[2026-02-19 20:25:27] INFO     datamatcher | PIPELINE COMPLETE in 4.23s
+[2026-02-19 20:26:37] INFO     datamatcher | Shutting down
+[2026-02-19 20:26:40] INFO     datamatcher | Loaded config: 2 clients, 2 days lookback
+[2026-02-19 20:26:49] INFO     datamatcher | ============================================================
+[2026-02-19 20:26:49] INFO     datamatcher | PIPELINE START - 2 clients, 30 days
+[2026-02-19 20:26:49] INFO     datamatcher | ============================================================
+[2026-02-19 20:26:49] INFO     datamatcher | Starting fetch for 2 clients...
+[2026-02-19 20:26:49] INFO     datamatcher | [OINUSA] Fetching data (last 30 days)...
+[2026-02-19 20:26:49] INFO     datamatcher | [MAUSA] Fetching data (last 30 days)...
+[2026-02-19 20:26:50] ERROR    datamatcher | [MAUSA] Fetch failed: HTTP 401 from https://www.mausa.org/api/dataManagement/get_transactions.php
+[2026-02-19 20:26:50] INFO     datamatcher | [OINUSA] Fetched 478 checkouts, 1591 transactions
+[2026-02-19 20:26:50] INFO     datamatcher | Fetch complete: 1/2 clients successful
+[2026-02-19 20:26:50] INFO     datamatcher | Starting matching for 2 clients (workers=4)...
+[2026-02-19 20:26:50] INFO     datamatcher | [OINUSA] Matched: 478, Unmatched: 0, Rate: 100.0%
+[2026-02-19 20:26:50] INFO     datamatcher | Matching complete: 478 matched, 0 unmatched across all clients
+[2026-02-19 20:26:50] INFO     datamatcher | Reports saved to C:\Usman\Project\python\dataMatcher\reports\20260219_202650
+[2026-02-19 20:26:53] ERROR    datamatcher | Email send failed: (535, b'5.7.8 Username and Password not accepted. For more information, go to\n5.7.8  https://support.google.com/mail/?p=BadCredentials af79cd13be357-8cb48c27330sm1723122585a.19 - gsmtp')
+[2026-02-19 20:26:53] INFO     datamatcher | PIPELINE COMPLETE in 4.55s
+[2026-02-19 20:27:01] INFO     datamatcher | ============================================================
+[2026-02-19 20:27:01] INFO     datamatcher | PIPELINE START - 2 clients, 30 days
+[2026-02-19 20:27:01] INFO     datamatcher | ============================================================
+[2026-02-19 20:27:01] INFO     datamatcher | Starting fetch for 2 clients...
+[2026-02-19 20:27:01] INFO     datamatcher | [OINUSA] Fetching data (last 30 days)...
+[2026-02-19 20:27:01] INFO     datamatcher | [MAUSA] Fetching data (last 30 days)...
+[2026-02-19 20:27:02] ERROR    datamatcher | [MAUSA] Fetch failed: HTTP 401 from https://www.mausa.org/api/dataManagement/get_checkout_journey.php
+[2026-02-19 20:27:02] INFO     datamatcher | [OINUSA] Fetched 478 checkouts, 1592 transactions
+[2026-02-19 20:27:02] INFO     datamatcher | Fetch complete: 1/2 clients successful
+[2026-02-19 20:27:02] INFO     datamatcher | Starting matching for 2 clients (workers=4)...
+[2026-02-19 20:27:02] INFO     datamatcher | [OINUSA] Matched: 478, Unmatched: 0, Rate: 100.0%
+[2026-02-19 20:27:02] INFO     datamatcher | Matching complete: 478 matched, 0 unmatched across all clients
+[2026-02-19 20:27:02] INFO     datamatcher | Reports saved to C:\Usman\Project\python\dataMatcher\reports\20260219_202702
+[2026-02-19 20:27:05] ERROR    datamatcher | Email send failed: (535, b'5.7.8 Username and Password not accepted. For more information, go to\n5.7.8  https://support.google.com/mail/?p=BadCredentials d75a77b69052e-506bc1c3bfasm129081781cf.14 - gsmtp')
+[2026-02-19 20:27:05] INFO     datamatcher | PIPELINE COMPLETE in 4.14s
+[2026-02-19 20:32:15] INFO     datamatcher | ============================================================
+[2026-02-19 20:32:15] INFO     datamatcher | PIPELINE START - 2 clients, 30 days
+[2026-02-19 20:32:15] INFO     datamatcher | ============================================================
+[2026-02-19 20:32:15] INFO     datamatcher | Starting fetch for 2 clients...
+[2026-02-19 20:32:15] INFO     datamatcher | [OINUSA] Fetching data (last 30 days)...
+[2026-02-19 20:32:15] INFO     datamatcher | [MAUSA] Fetching data (last 30 days)...
+[2026-02-19 20:32:16] ERROR    datamatcher | [MAUSA] Fetch failed: HTTP 401 from https://www.mausa.org/api/dataManagement/get_transactions.php
+[2026-02-19 20:32:24] INFO     datamatcher | [OINUSA] Fetched 478 checkouts, 1591 transactions
+[2026-02-19 20:32:24] INFO     datamatcher | Fetch complete: 1/2 clients successful
+[2026-02-19 20:32:24] INFO     datamatcher | Starting matching for 2 clients (workers=4)...
+[2026-02-19 20:32:24] INFO     datamatcher | [OINUSA] Matched: 478, Unmatched: 0, Rate: 100.0%
+[2026-02-19 20:32:24] INFO     datamatcher | Matching complete: 478 matched, 0 unmatched across all clients
+[2026-02-19 20:32:24] INFO     datamatcher | Reports saved to C:\Usman\Project\python\dataMatcher\reports\20260219_203224
+[2026-02-19 20:32:27] ERROR    datamatcher | Email send failed: (535, b'5.7.8 Username and Password not accepted. For more information, go to\n5.7.8  https://support.google.com/mail/?p=BadCredentials af79cd13be357-8cb67df1fdbsm754176185a.48 - gsmtp')
+[2026-02-19 20:32:27] INFO     datamatcher | PIPELINE COMPLETE in 12.20s
+[2026-02-19 20:38:30] INFO     datamatcher | ============================================================
+[2026-02-19 20:38:30] INFO     datamatcher | PIPELINE START - 2 clients, 30 days
+[2026-02-19 20:38:30] INFO     datamatcher | ============================================================
+[2026-02-19 20:38:30] INFO     datamatcher | Starting fetch for 2 clients...
+[2026-02-19 20:38:30] INFO     datamatcher | [OINUSA] Fetching data (last 30 days)...
+[2026-02-19 20:38:30] INFO     datamatcher | [MAUSA] Fetching data (last 30 days)...
+[2026-02-19 20:38:31] ERROR    datamatcher | [MAUSA] Fetch failed: HTTP 401 from https://www.mausa.org/api/dataManagement/get_transactions.php
+[2026-02-19 20:38:31] INFO     datamatcher | [OINUSA] Fetched 478 checkouts, 1591 transactions
+[2026-02-19 20:38:31] INFO     datamatcher | Fetch complete: 1/2 clients successful
+[2026-02-19 20:38:31] INFO     datamatcher | Starting matching for 2 clients (workers=4)...
+[2026-02-19 20:38:31] INFO     datamatcher | [OINUSA] Matched: 478, Unmatched: 0, Rate: 100.0%
+[2026-02-19 20:38:31] INFO     datamatcher | Matching complete: 478 matched, 0 unmatched across all clients
+[2026-02-19 20:38:31] INFO     datamatcher | Reports saved to C:\Usman\Project\python\dataMatcher\reports\20260219_203831
+[2026-02-19 20:38:34] ERROR    datamatcher | Email send failed: (535, b'5.7.8 Username and Password not accepted. For more information, go to\n5.7.8  https://support.google.com/mail/?p=BadCredentials 6a1803df08f44-8971cddb9efsm262824216d6.51 - gsmtp')
+[2026-02-19 20:38:34] INFO     datamatcher | PIPELINE COMPLETE in 4.49s
+[2026-02-19 20:38:41] INFO     datamatcher | Shutting down
+[2026-02-19 20:38:45] INFO     datamatcher | Loaded config: 2 clients, 2 days lookback
+[2026-02-19 20:38:49] INFO     datamatcher | ============================================================
+[2026-02-19 20:38:49] INFO     datamatcher | PIPELINE START - 2 clients, 2 days
+[2026-02-19 20:38:49] INFO     datamatcher | ============================================================
+[2026-02-19 20:38:49] INFO     datamatcher | Starting fetch for 2 clients...
+[2026-02-19 20:38:49] INFO     datamatcher | [OINUSA] Fetching data (last 2 days)...
+[2026-02-19 20:38:49] INFO     datamatcher | [MAUSA] Fetching data (last 2 days)...
+[2026-02-19 20:38:50] INFO     datamatcher | [OINUSA] Fetched 63 checkouts, 136 transactions
+[2026-02-19 20:38:50] ERROR    datamatcher | [MAUSA] Fetch failed: HTTP 401 from https://www.mausa.org/api/dataManagement/get_transactions.php
+[2026-02-19 20:38:50] INFO     datamatcher | Fetch complete: 1/2 clients successful
+[2026-02-19 20:38:50] INFO     datamatcher | Starting matching for 2 clients (workers=4)...
+[2026-02-19 20:38:50] INFO     datamatcher | [OINUSA] Matched: 63, Unmatched: 0, Rate: 100.0%
+[2026-02-19 20:38:50] INFO     datamatcher | Matching complete: 63 matched, 0 unmatched across all clients
+[2026-02-19 20:38:50] INFO     datamatcher | Reports saved to C:\Usman\Project\python\dataMatcher\reports\20260219_203850
+[2026-02-19 20:38:52] ERROR    datamatcher | Email send failed: (535, b'5.7.8 Username and Password not accepted. For more information, go to\n5.7.8  https://support.google.com/mail/?p=BadCredentials 6a1803df08f44-8971cddc120sm264164076d6.52 - gsmtp')
+[2026-02-19 20:38:52] INFO     datamatcher | PIPELINE COMPLETE in 3.64s
+[2026-02-19 20:41:17] INFO     datamatcher | Shutting down

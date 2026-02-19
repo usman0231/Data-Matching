@@ -1,0 +1,33 @@
+{
+  "generated_at": "2026-02-19T20:38:50.079682",
+  "total_clients": 2,
+  "overall_summary": {
+    "total_matched": 63,
+    "total_unmatched": 0,
+    "clients_with_errors": 1
+  },
+  "clients": [
+    {
+      "client": "OINUSA",
+      "summary": {
+        "total_checkouts": 63,
+        "total_transactions": 136,
+        "matched": 63,
+        "unmatched": 0,
+        "match_rate": 100.0
+      },
+      "unmatched_records": []
+    },
+    {
+      "client": "MAUSA",
+      "summary": {
+        "total_checkouts": 0,
+        "total_transactions": 0,
+        "matched": 0,
+        "unmatched": 0,
+        "match_rate": 0.0
+      },
+      "unmatched_records": []
+    }
+  ]
+}
