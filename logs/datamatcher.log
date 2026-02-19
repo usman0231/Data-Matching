@@ -1,0 +1,67 @@
+[2026-02-19 19:04:20] INFO     datamatcher | Loaded config: 2 clients, 2 days lookback
+[2026-02-19 19:05:59] INFO     datamatcher | ============================================================
+[2026-02-19 19:05:59] INFO     datamatcher | PIPELINE START - 2 clients, 30 days
+[2026-02-19 19:05:59] INFO     datamatcher | ============================================================
+[2026-02-19 19:05:59] INFO     datamatcher | Starting fetch for 2 clients...
+[2026-02-19 19:05:59] INFO     datamatcher | [Client A] Fetching data (last 30 days)...
+[2026-02-19 19:05:59] INFO     datamatcher | [Client B] Fetching data (last 30 days)...
+[2026-02-19 19:06:00] ERROR    datamatcher | [Client A] Fetch failed: 200, message='Attempt to decode JSON with unexpected mimetype: text/html; charset=utf-8', url='https://clienta.com/api/get_checkout_journey.php?days=30&page=1&limit=5000'
+[2026-02-19 19:06:00] ERROR    datamatcher | [Client B] Fetch failed: 200, message='Attempt to decode JSON with unexpected mimetype: text/html;charset=utf-8', url='https://www.hugedomains.com/domain_profile.cfm?d=clientb.com'
+[2026-02-19 19:06:00] INFO     datamatcher | Fetch complete: 0/2 clients successful
+[2026-02-19 19:06:00] INFO     datamatcher | Starting matching for 2 clients (workers=4)...
+[2026-02-19 19:06:00] INFO     datamatcher | Matching complete: 0 matched, 0 unmatched across all clients
+[2026-02-19 19:06:00] INFO     datamatcher | Reports saved to C:\Usman\Project\python\dataMatcher\reports\20260219_190600
+[2026-02-19 19:06:03] ERROR    datamatcher | Email send failed: (535, b'5.7.8 Username and Password not accepted. For more information, go to\n5.7.8  https://support.google.com/mail/?p=BadCredentials ffacd0b85a97d-43796ad015bsm50490712f8f.38 - gsmtp')
+[2026-02-19 19:06:03] INFO     datamatcher | PIPELINE COMPLETE in 4.64s
+[2026-02-19 19:08:41] INFO     datamatcher | ============================================================
+[2026-02-19 19:08:41] INFO     datamatcher | PIPELINE START - 1 clients, 30 days
+[2026-02-19 19:08:41] INFO     datamatcher | ============================================================
+[2026-02-19 19:08:41] INFO     datamatcher | Starting fetch for 1 clients...
+[2026-02-19 19:08:41] INFO     datamatcher | [OINUSA] Fetching data (last 30 days)...
+[2026-02-19 19:08:42] ERROR    datamatcher | [OINUSA] Fetch failed: HTTP 404 from https://oinusa.org/api/get_transactions.php
+[2026-02-19 19:08:42] INFO     datamatcher | Fetch complete: 0/1 clients successful
+[2026-02-19 19:08:42] INFO     datamatcher | Starting matching for 1 clients (workers=4)...
+[2026-02-19 19:08:42] INFO     datamatcher | Matching complete: 0 matched, 0 unmatched across all clients
+[2026-02-19 19:08:42] INFO     datamatcher | Reports saved to C:\Usman\Project\python\dataMatcher\reports\20260219_190842
+[2026-02-19 19:08:45] ERROR    datamatcher | Email send failed: (535, b'5.7.8 Username and Password not accepted. For more information, go to\n5.7.8  https://support.google.com/mail/?p=BadCredentials 5b1f17b1804b1-483a31d82a8sm6628135e9.15 - gsmtp')
+[2026-02-19 19:08:45] INFO     datamatcher | PIPELINE COMPLETE in 4.00s
+[2026-02-19 19:09:37] INFO     datamatcher | ============================================================
+[2026-02-19 19:09:37] INFO     datamatcher | PIPELINE START - 1 clients, 30 days
+[2026-02-19 19:09:37] INFO     datamatcher | ============================================================
+[2026-02-19 19:09:37] INFO     datamatcher | Starting fetch for 1 clients...
+[2026-02-19 19:09:37] INFO     datamatcher | [OINUSA] Fetching data (last 30 days)...
+[2026-02-19 19:09:38] INFO     datamatcher | [OINUSA] Fetched 549 checkouts, 1587 transactions
+[2026-02-19 19:09:38] INFO     datamatcher | Fetch complete: 1/1 clients successful
+[2026-02-19 19:09:38] INFO     datamatcher | Starting matching for 1 clients (workers=4)...
+[2026-02-19 19:09:38] INFO     datamatcher | [OINUSA] Matched: 491, Unmatched: 58, Rate: 89.4%
+[2026-02-19 19:09:38] INFO     datamatcher | Matching complete: 491 matched, 58 unmatched across all clients
+[2026-02-19 19:09:38] INFO     datamatcher | Reports saved to C:\Usman\Project\python\dataMatcher\reports\20260219_190938
+[2026-02-19 19:09:41] ERROR    datamatcher | Email send failed: (535, b'5.7.8 Username and Password not accepted. For more information, go to\n5.7.8  https://support.google.com/mail/?p=BadCredentials ffacd0b85a97d-43796abcda5sm53369724f8f.19 - gsmtp')
+[2026-02-19 19:09:41] INFO     datamatcher | PIPELINE COMPLETE in 4.35s
+[2026-02-19 19:10:40] INFO     datamatcher | ============================================================
+[2026-02-19 19:10:40] INFO     datamatcher | PIPELINE START - 1 clients, 30 days
+[2026-02-19 19:10:40] INFO     datamatcher | ============================================================
+[2026-02-19 19:10:40] INFO     datamatcher | Starting fetch for 1 clients...
+[2026-02-19 19:10:40] INFO     datamatcher | [OINUSA] Fetching data (last 30 days)...
+[2026-02-19 19:10:41] INFO     datamatcher | [OINUSA] Fetched 549 checkouts, 1587 transactions
+[2026-02-19 19:10:41] INFO     datamatcher | Fetch complete: 1/1 clients successful
+[2026-02-19 19:10:41] INFO     datamatcher | Starting matching for 1 clients (workers=4)...
+[2026-02-19 19:10:41] INFO     datamatcher | [OINUSA] Matched: 491, Unmatched: 58, Rate: 89.4%
+[2026-02-19 19:10:41] INFO     datamatcher | Matching complete: 491 matched, 58 unmatched across all clients
+[2026-02-19 19:10:41] INFO     datamatcher | Reports saved to C:\Usman\Project\python\dataMatcher\reports\20260219_191041
+[2026-02-19 19:10:44] ERROR    datamatcher | Email send failed: (535, b'5.7.8 Username and Password not accepted. For more information, go to\n5.7.8  https://support.google.com/mail/?p=BadCredentials 5b1f17b1804b1-4839f94fafcsm27068485e9.5 - gsmtp')
+[2026-02-19 19:10:44] INFO     datamatcher | PIPELINE COMPLETE in 4.31s
+[2026-02-19 19:13:02] INFO     datamatcher | ============================================================
+[2026-02-19 19:13:02] INFO     datamatcher | PIPELINE START - 1 clients, 30 days
+[2026-02-19 19:13:02] INFO     datamatcher | ============================================================
+[2026-02-19 19:13:02] INFO     datamatcher | Starting fetch for 1 clients...
+[2026-02-19 19:13:02] INFO     datamatcher | [OINUSA] Fetching data (last 30 days)...
+[2026-02-19 19:13:03] INFO     datamatcher | [OINUSA] Fetched 477 checkouts, 1587 transactions
+[2026-02-19 19:13:03] INFO     datamatcher | Fetch complete: 1/1 clients successful
+[2026-02-19 19:13:03] INFO     datamatcher | Starting matching for 1 clients (workers=4)...
+[2026-02-19 19:13:03] INFO     datamatcher | [OINUSA] Matched: 477, Unmatched: 0, Rate: 100.0%
+[2026-02-19 19:13:03] INFO     datamatcher | Matching complete: 477 matched, 0 unmatched across all clients
+[2026-02-19 19:13:03] INFO     datamatcher | Reports saved to C:\Usman\Project\python\dataMatcher\reports\20260219_191303
+[2026-02-19 19:13:06] ERROR    datamatcher | Email send failed: (535, b'5.7.8 Username and Password not accepted. For more information, go to\n5.7.8  https://support.google.com/mail/?p=BadCredentials 5b1f17b1804b1-483a2cb9f6esm11349835e9.4 - gsmtp')
+[2026-02-19 19:13:06] INFO     datamatcher | PIPELINE COMPLETE in 4.30s
+[2026-02-19 19:14:06] INFO     datamatcher | Shutting down
