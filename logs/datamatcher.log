@@ -65,3 +65,20 @@
 [2026-02-19 19:13:06] ERROR    datamatcher | Email send failed: (535, b'5.7.8 Username and Password not accepted. For more information, go to\n5.7.8  https://support.google.com/mail/?p=BadCredentials 5b1f17b1804b1-483a2cb9f6esm11349835e9.4 - gsmtp')
 [2026-02-19 19:13:06] INFO     datamatcher | PIPELINE COMPLETE in 4.30s
 [2026-02-19 19:14:06] INFO     datamatcher | Shutting down
+[2026-02-19 20:08:23] INFO     datamatcher | Loaded config: 2 clients, 2 days lookback
+[2026-02-19 20:09:40] INFO     datamatcher | ============================================================
+[2026-02-19 20:09:40] INFO     datamatcher | PIPELINE START - 2 clients, 30 days
+[2026-02-19 20:09:40] INFO     datamatcher | ============================================================
+[2026-02-19 20:09:40] INFO     datamatcher | Starting fetch for 2 clients...
+[2026-02-19 20:09:40] INFO     datamatcher | [OINUSA] Fetching data (last 30 days)...
+[2026-02-19 20:09:40] INFO     datamatcher | [MAUSA] Fetching data (last 30 days)...
+[2026-02-19 20:09:41] ERROR    datamatcher | [MAUSA] Fetch failed: HTTP 500 from https://www.mausa.org/api/dataManagement/get_checkout_journey.php
+[2026-02-19 20:09:42] INFO     datamatcher | [OINUSA] Fetched 478 checkouts, 1590 transactions
+[2026-02-19 20:09:42] INFO     datamatcher | Fetch complete: 1/2 clients successful
+[2026-02-19 20:09:42] INFO     datamatcher | Starting matching for 2 clients (workers=4)...
+[2026-02-19 20:09:42] INFO     datamatcher | [OINUSA] Matched: 478, Unmatched: 0, Rate: 100.0%
+[2026-02-19 20:09:42] INFO     datamatcher | Matching complete: 478 matched, 0 unmatched across all clients
+[2026-02-19 20:09:42] INFO     datamatcher | Reports saved to D:\projects\python\dataMatching\reports\20260219_200942
+[2026-02-19 20:09:46] ERROR    datamatcher | Email send failed: (535, b'5.7.8 Username and Password not accepted. For more information, go to\n5.7.8  https://support.google.com/mail/?p=BadCredentials 5b1f17b1804b1-483a31bac27sm9604005e9.5 - gsmtp')
+[2026-02-19 20:09:46] INFO     datamatcher | PIPELINE COMPLETE in 6.13s
+[2026-02-19 20:15:42] INFO     datamatcher | Shutting down
